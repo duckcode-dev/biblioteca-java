@@ -1,0 +1,8 @@
+# Ignorar archivos de clase y carpetas de compilación
+*.class
+/out/
+/bin/
+# Ignorar archivos de sistema
+*.log
+.DS_Store
+Thumbs.db
