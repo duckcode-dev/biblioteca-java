@@ -12,12 +12,13 @@ public class main {
 
         Scanner valorIngresado = new Scanner(System.in);
 
-        System.out.println("BIBLIOTECA");
+        System.out.println("BIBLIOTECA MUNICIPAL");
         System.out.println("1.Ingresar libro");
         System.out.println("2.Buscar libro");
         System.out.println("3.Mostrar todos los libros");
         System.out.println("4.salir");
         String opcionSeleccionada = valorIngresado.nextLine();
         System.out.println(opcionSeleccionada);
+
     }
 }
