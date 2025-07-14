@@ -7,6 +7,10 @@
  */
 public class main {
     public static void main(String[] args) {
-
+        System.out.println("BIBLIOTECA");
+        System.out.println("1.Ingresar libro");
+        System.out.println("2.Buscar libro");
+        System.out.println("3.Mostrar todos los libros");
+        System.out.println("4.salir");
     }
 }
