@@ -20,5 +20,22 @@ public class main {
         String opcionSeleccionada = valorIngresado.nextLine();
         System.out.println(opcionSeleccionada);
 
+        switch (opcionSeleccionada) {
+            case "1":
+
+                break;
+            case "2":
+
+                break;
+            case "3":
+
+                break;
+            case "4":
+                System.out.println("¡Adios!.¡Que tengas un buen día!");
+                break;
+            default:
+                break;
+        }
+
     }
 }
