@@ -37,5 +37,7 @@ public class main {
                 break;
         }
 
+        // cerrar objeto Scanner
+        valorIngresado.close();
     }
 }
