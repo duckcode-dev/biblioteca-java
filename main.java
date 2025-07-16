@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Descripción: Punto de entrada principal para la aplicación de biblioteca.
  * Licencia: MIT
  */
-public class main {
+public class Main {
     public static void main(String[] args) {
 
         Scanner valorIngresado = new Scanner(System.in);
@@ -22,7 +22,9 @@ public class main {
 
         switch (opcionSeleccionada) {
             case "1":
-
+                System.out.println("ingresar título de libro");
+                System.out.println("ingresar autor");
+                System.out.println("año de publicación");
                 break;
             case "2":
 
