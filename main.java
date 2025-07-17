@@ -13,6 +13,11 @@ public class Main {
         Scanner valorIngresado = new Scanner(System.in);
 
         boolean menuValida = false;
+        String opcionSeleccionada = "";
+
+        // objetos
+        Libro libro = new Libro();
+        Biblioteca biblioteca = new Biblioteca();
 
         while (menuValida == false) {
             System.out.println("BIBLIOTECA MUNICIPAL");
@@ -20,7 +25,7 @@ public class Main {
             System.out.println("2.Buscar libro");
             System.out.println("3.Mostrar todos los libros");
             System.out.println("4.salir");
-            String opcionSeleccionada = valorIngresado.nextLine();
+            opcionSeleccionada = valorIngresado.nextLine();
 
             System.out.println(opcionSeleccionada);
             switch (opcionSeleccionada) {
