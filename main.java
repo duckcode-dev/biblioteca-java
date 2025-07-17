@@ -12,31 +12,36 @@ public class Main {
 
         Scanner valorIngresado = new Scanner(System.in);
 
-        System.out.println("BIBLIOTECA MUNICIPAL");
-        System.out.println("1.Ingresar libro");
-        System.out.println("2.Buscar libro");
-        System.out.println("3.Mostrar todos los libros");
-        System.out.println("4.salir");
-        String opcionSeleccionada = valorIngresado.nextLine();
-        System.out.println(opcionSeleccionada);
+        boolean menuValida = false;
 
-        switch (opcionSeleccionada) {
-            case "1":
-                System.out.println("ingresar título de libro");
-                System.out.println("ingresar autor");
-                System.out.println("año de publicación");
-                break;
-            case "2":
+        while (menuValida == false) {
+            System.out.println("BIBLIOTECA MUNICIPAL");
+            System.out.println("1.Ingresar libro");
+            System.out.println("2.Buscar libro");
+            System.out.println("3.Mostrar todos los libros");
+            System.out.println("4.salir");
+            String opcionSeleccionada = valorIngresado.nextLine();
 
-                break;
-            case "3":
+            System.out.println(opcionSeleccionada);
+            switch (opcionSeleccionada) {
+                case "1":
+                    System.out.println("ingresar título de libro");
+                    System.out.println("ingresar autor");
+                    System.out.println("año de publicación");
+                    break;
+                case "2":
 
-                break;
-            case "4":
-                System.out.println("¡Adios!.¡Que tengas un buen día!");
-                break;
-            default:
-                break;
+                    break;
+                case "3":
+
+                    break;
+                case "4":
+                    System.out.println("¡Adios!.¡Que tengas un buen día!");
+                    menuValida = true;
+                    break;
+                default:
+                    break;
+            }
         }
 
         // cerrar objeto Scanner
