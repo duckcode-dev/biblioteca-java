@@ -35,8 +35,8 @@ public class Main {
                     System.out.println("ingresar autor");
                     libro.setAutor(valorIngresado.nextLine());
                     System.out.println("año de publicación");
-                    libro.setAnioPublicacion(valorIngresado.nextInt(0));
-                    libro.setAutor(valorIngresado.nextLine());
+                    libro.setAnioPublicacion(valorIngresado.nextInt());
+                    biblioteca.agregarLibro(libro);
                     break;
                 case "2":
 
