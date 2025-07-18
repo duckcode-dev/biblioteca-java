@@ -31,8 +31,12 @@ public class Main {
             switch (opcionSeleccionada) {
                 case "1":
                     System.out.println("ingresar título de libro");
+                    libro.setTitulo(valorIngresado.nextLine());
                     System.out.println("ingresar autor");
+                    libro.setAutor(valorIngresado.nextLine());
                     System.out.println("año de publicación");
+                    libro.setAnioPublicacion(valorIngresado.nextInt(0));
+                    libro.setAutor(valorIngresado.nextLine());
                     break;
                 case "2":
 
