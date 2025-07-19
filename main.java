@@ -16,7 +16,7 @@ public class Main {
         String opcionSeleccionada = "";
 
         // objetos
-        Libro libro = new Libro();
+        // Libro libro = new Libro();
         Biblioteca biblioteca = new Biblioteca();
 
         while (menuValida == false) {
@@ -30,12 +30,14 @@ public class Main {
             System.out.println(opcionSeleccionada);
             switch (opcionSeleccionada) {
                 case "1":
+                    Libro libro = new Libro();
                     System.out.println("ingresar título de libro");
                     libro.setTitulo(valorIngresado.nextLine());
                     System.out.println("ingresar autor");
                     libro.setAutor(valorIngresado.nextLine());
                     System.out.println("año de publicación");
                     libro.setAnioPublicacion(valorIngresado.nextInt());
+                    valorIngresado.nextLine(); // limpiar el buffer
                     biblioteca.agregarLibro(libro);
                     break;
                 case "2":
@@ -43,7 +45,9 @@ public class Main {
                     break;
                 case "3":
                     System.out.println("Libros Ingresados:");
-                    System.out.println(biblioteca.getLibros());
+                    for (Libro libroActual : biblioteca.getLibros()) {
+                        System.out.println(libroActual);
+                    }
                     break;
                 case "4":
                     System.out.println("¡Adios!.¡Que tengas un buen día!");
