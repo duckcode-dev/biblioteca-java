@@ -38,4 +38,13 @@ public class Libro {
         this.anioPublicacion = anioPublicacion;
     }
 
+    @Override
+    public String toString() {
+        return "Libro{" +
+                "titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", año=" + anioPublicacion +
+                '}';
+    }
+
 }

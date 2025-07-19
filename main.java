@@ -42,7 +42,8 @@ public class Main {
 
                     break;
                 case "3":
-
+                    System.out.println("Libros Ingresados:");
+                    System.out.println(biblioteca.getLibros());
                     break;
                 case "4":
                     System.out.println("¡Adios!.¡Que tengas un buen día!");
