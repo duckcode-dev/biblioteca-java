@@ -14,12 +14,14 @@ public class Main {
 
         boolean menuValida = false;
         String opcionSeleccionada = "";
+        int idLibro = 0;
 
         // objetos
         // Libro libro = new Libro();
         Biblioteca biblioteca = new Biblioteca();
 
         while (menuValida == false) {
+
             System.out.println("BIBLIOTECA MUNICIPAL");
             System.out.println("1.Ingresar libro");
             System.out.println("2.Buscar libro");
@@ -42,6 +44,8 @@ public class Main {
                     break;
                 case "2":
                     System.out.println("ingresar id de Libro:");
+                    idLibro = valorIngresado.nextInt();
+                    biblioteca.BuscarLibro(idLibro, biblioteca.getLibros());
                     valorIngresado.nextLine(); // limpiar el buffer
                     break;
                 case "3":
