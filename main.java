@@ -45,7 +45,7 @@ public class Main {
                 case "2":
                     System.out.println("ingresar id de Libro:");
                     idLibro = valorIngresado.nextInt();
-                    biblioteca.BuscarLibro(idLibro, biblioteca.getLibros());
+                    biblioteca.buscarLibro(idLibro, biblioteca.getLibros());
                     valorIngresado.nextLine(); // limpiar el buffer
                     break;
                 case "3":
