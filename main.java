@@ -41,7 +41,8 @@ public class Main {
                     biblioteca.agregarLibro(libro);
                     break;
                 case "2":
-
+                    System.out.println("ingresar id de Libro:");
+                    valorIngresado.nextLine(); // limpiar el buffer
                     break;
                 case "3":
                     System.out.println("Libros Ingresados:");
