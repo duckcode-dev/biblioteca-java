@@ -38,6 +38,10 @@ public class Libro {
         this.anioPublicacion = anioPublicacion;
     }
 
+    public boolean validaString(String texto) {
+        return texto.matches("[a-zA-Z]+");
+    }
+
     @Override
     public String toString() {
         return "Libro : " +
