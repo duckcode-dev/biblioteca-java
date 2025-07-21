@@ -15,7 +15,7 @@ public class Main {
         boolean menuValida = false;
         String opcionSeleccionada = "";
         int idLibro = 0;
-        boolean validaTitulo = false;
+        boolean validaString = false;
 
         // objetos
         // Libro libro = new Libro();
@@ -37,15 +37,23 @@ public class Main {
                     do {
                         System.out.println("ingresar título de libro");
                         String tituloIngresado = valorIngresado.nextLine();
-                        validaTitulo = libro.validaString(tituloIngresado);
-                        if (validaTitulo == false) {
+                        validaString = libro.validaString(tituloIngresado);
+                        if (validaString == false) {
                             System.out.println("error! ingresar valor válido!");
                         } else {
                             libro.setTitulo(tituloIngresado);
                         }
-                    } while (validaTitulo == false);
-                    System.out.println("ingresar autor");
-                    libro.setAutor(valorIngresado.nextLine());
+                    } while (validaString == false);
+                    do {
+                        System.out.println("ingresar autor de libro");
+                        String autorIngresado = valorIngresado.nextLine();
+                        validaString = libro.validaString(autorIngresado);
+                        if (validaString == false) {
+                            System.out.println("error! ingresar valor válido!");
+                        } else {
+                            libro.setAutor(autorIngresado);
+                        }
+                    } while (validaString == false);
                     System.out.println("año de publicación");
                     libro.setAnioPublicacion(valorIngresado.nextInt());
                     valorIngresado.nextLine(); // limpiar el buffer
