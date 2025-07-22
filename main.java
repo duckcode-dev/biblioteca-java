@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 /**
- * Nombre del archivo: main.java
- * Autor: duckcode-dev
- * Fecha de creación: 13/07/2025
  * Descripción: Punto de entrada principal para la aplicación de biblioteca.
- * Licencia: MIT
+ * Nombre del archivo: Main.java
+ * 
+ * @author: duckcode-dev
+ * @version 1.0
  */
 public class Main {
     public static void main(String[] args) {
