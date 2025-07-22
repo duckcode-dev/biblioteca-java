@@ -1,6 +1,14 @@
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Descripción: Clase de donde se obtienen objetos que almacenan instancias de
+ * Libros.
+ * Nombre del archivo: Bibliote.java
+ * 
+ * @author: duckcode-dev
+ * @version 1.0
+ */
 public class Biblioteca {
 
     private Set<Libro> libros = new HashSet<>();
