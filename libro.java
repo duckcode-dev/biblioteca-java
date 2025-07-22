@@ -1,4 +1,10 @@
-
+/**
+ * Descripción: Clase de donde se obtienen las instancias de Libros.
+ * Nombre del archivo: Libro.java
+ * 
+ * @author: duckcode-dev
+ * @version 1.0
+ */
 public class Libro {
     private int id;
     private String titulo;
