@@ -18,6 +18,7 @@ public class Main {
         boolean validaTitulo = false;
         boolean validaAnio = false;
         boolean validaAutor = false;
+        boolean validaLibro = false;
 
         // objetos
         // Libro libro = new Libro();
@@ -93,7 +94,12 @@ public class Main {
                             validaAnio = false;
                         }
                     } while (validaAnio == false);
-                    biblioteca.eliminarLibro(libro);
+                    validaLibro = biblioteca.eliminarLibro(idLibro, biblioteca.getLibros());
+                    if (validaLibro == true) {
+                        System.out.println("libro eliminado!! :");
+                    } else {
+                        System.out.println("libro no encontrado!! :");
+                    }
                     break;
                 case "5":
                     System.out.println("¡Adios!.¡Que tengas un buen día!");

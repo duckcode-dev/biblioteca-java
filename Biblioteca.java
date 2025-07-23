@@ -1,4 +1,5 @@
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -30,6 +31,19 @@ public class Biblioteca {
             if (libroActual.getId() == id) {
                 System.out.println("libro encontrado!! :");
                 System.out.println(libroActual);
+                validador = true;
+            }
+        }
+        return validador;
+    }
+
+    public boolean eliminarLibro(int id, Set<Libro> libros) {
+        boolean validador = false;
+        Iterator<Libro> it = libros.iterator();
+        while (it.hasNext()) {
+            Libro libroActual = it.next();
+            if (libroActual.getId() == id) {
+                it.remove();
                 validador = true;
             }
         }
