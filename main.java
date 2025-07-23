@@ -82,7 +82,18 @@ public class Main {
                     }
                     break;
                 case "4":
-                    System.out.println("Ingrese ID:");
+                    do {
+                        try {
+                            System.out.println("Ingrese Id");
+                            String entrada = valorIngresado.nextLine();
+                            idLibro = Integer.parseInt(entrada);
+                            validaAnio = true;
+                        } catch (Exception e) {
+                            System.out.println("error! ingresar valor ID válido!");
+                            validaAnio = false;
+                        }
+                    } while (validaAnio == false);
+                    biblioteca.eliminarLibro(libro);
                     break;
                 case "5":
                     System.out.println("¡Adios!.¡Que tengas un buen día!");
