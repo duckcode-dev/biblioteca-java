@@ -29,10 +29,9 @@ public class Main {
             System.out.println("1.Ingresar libro");
             System.out.println("2.Buscar libro");
             System.out.println("3.Mostrar todos los libros");
-            System.out.println("4.salir");
+            System.out.println("4.Eliminar Libro");
+            System.out.println("5.salir");
             opcionSeleccionada = valorIngresado.nextLine();
-
-            System.out.println(opcionSeleccionada);
             switch (opcionSeleccionada) {
                 case "1":
                     Libro libro = new Libro();
@@ -83,6 +82,9 @@ public class Main {
                     }
                     break;
                 case "4":
+                    System.out.println("Ingrese ID:");
+                    break;
+                case "5":
                     System.out.println("¡Adios!.¡Que tengas un buen día!");
                     menuValida = true;
                     break;
