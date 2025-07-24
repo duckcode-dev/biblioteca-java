@@ -61,7 +61,7 @@ public class Main {
                             System.out.println("año de publicación");
                             String entrada = valorIngresado.nextLine();
                             int anioIngresado = Integer.parseInt(entrada);
-                            if (anioIngresado <= 0) {
+                            if (anioIngresado <= 0 || anioIngresado > 2025) {
                                 System.out.println("error!, ingrese año mayor que 0");
                                 validaAnio = false;
                             } else {
