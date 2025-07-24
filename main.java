@@ -61,8 +61,13 @@ public class Main {
                             System.out.println("año de publicación");
                             String entrada = valorIngresado.nextLine();
                             int anioIngresado = Integer.parseInt(entrada);
-                            validaAnio = true;
-                            libro.setAnioPublicacion(anioIngresado);
+                            if (anioIngresado <= 0) {
+                                System.out.println("error!, ingrese año mayor que 0");
+                                validaAnio = false;
+                            } else {
+                                validaAnio = true;
+                                libro.setAnioPublicacion(anioIngresado);
+                            }
                         } catch (Exception e) {
                             System.out.println("error! ingresar valor válido!");
                             validaAnio = false;
