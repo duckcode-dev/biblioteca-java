@@ -26,12 +26,12 @@ public class Main {
 
         while (menuValida == false) {
 
-            System.out.println("BIBLIOTECA MUNICIPAL");
-            System.out.println("1.Ingresar libro");
-            System.out.println("2.Buscar libro");
-            System.out.println("3.Mostrar todos los libros");
-            System.out.println("4.Eliminar Libro");
-            System.out.println("5.salir");
+            System.out.println("***BIBLIOTECA DE ALEJANDRÍA***");
+            System.out.println("1.  Ingresar Libro");
+            System.out.println("2.  Buscar Libro por ID");
+            System.out.println("3.  Mostrar todos los Libros");
+            System.out.println("4.  Eliminar Libro por ID");
+            System.out.println("5.  salir");
             opcionSeleccionada = valorIngresado.nextLine();
             switch (opcionSeleccionada) {
                 case "1":
