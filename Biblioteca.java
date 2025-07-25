@@ -13,7 +13,7 @@ import java.util.Set;
 public class Biblioteca {
 
     private Set<Libro> libros = new HashSet<>();
-    private Set<Libro> usuarios = new HashSet<>();
+    private Set<Usuario> usuarios = new HashSet<>();
     private int contadorId = 1; // contador para IDs
 
     public Set<Libro> getLibros() {
