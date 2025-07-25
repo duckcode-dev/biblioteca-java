@@ -3,6 +3,14 @@ public class Usuario {
     private String name;
     private String foneNumber;
 
+    public Usuario(String name, String foneNumber) {
+        this.name = name;
+        this.foneNumber = foneNumber;
+    }
+
+    public Usuario() {
+    }
+
     public int getId() {
         return Id;
     }
