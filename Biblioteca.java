@@ -20,6 +20,10 @@ public class Biblioteca {
         return libros;
     }
 
+    public Set<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
     public void agregarLibro(Libro libro) {
         libro.setId(contadorId++);
         libros.add(libro);
