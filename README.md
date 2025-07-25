@@ -5,7 +5,7 @@ Este proyecto es una aplicación básica para la gestión de una biblioteca. Per
 1. Agregar un libro (título, autor, año de publicación).
 2. Buscar un libro por título (insensible a mayúsculas/minúsculas).
 3. Mostrar todos los libros registrados.
-4. Eliminar Libro.
+4. Eliminar Libro por ID.
 
 ## Instalación
 
