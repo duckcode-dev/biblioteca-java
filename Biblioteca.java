@@ -30,6 +30,12 @@ public class Biblioteca {
         System.err.println("libro agregado a la lista con id: " + libro.getId());
     }
 
+    public void agregarUsuario(Usuario usuario) {
+        usuario.setId(contadorId++);
+        usuarios.add(usuario);
+        System.err.println("Usuario agregado a la lista con id: " + usuario.getId());
+    }
+
     public boolean buscarLibro(int id, Set<Libro> libros) {
         boolean validador = false;
         for (Libro libroActual : libros) {
