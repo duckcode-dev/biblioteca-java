@@ -31,7 +31,8 @@ public class Main {
             System.out.println("2.  Buscar Libro por ID");
             System.out.println("3.  Mostrar todos los Libros");
             System.out.println("4.  Eliminar Libro por ID");
-            System.out.println("5.  salir");
+            System.out.println("5.  Ingresar Usuario");
+            System.out.println("6.  salir");
             opcionSeleccionada = valorIngresado.nextLine();
             switch (opcionSeleccionada) {
                 case "1":
@@ -107,6 +108,8 @@ public class Main {
                     }
                     break;
                 case "5":
+                    break;
+                case "6":
                     System.out.println("¡Adios!.¡Que tengas un buen día!");
                     menuValida = true;
                     break;
