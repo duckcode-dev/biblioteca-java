@@ -2,11 +2,7 @@ public class Usuario {
     private int Id;
     private String name;
     private String foneNumber;
-
-    public Usuario(String name, String foneNumber) {
-        this.name = name;
-        this.foneNumber = foneNumber;
-    }
+    private String email;
 
     public Usuario() {
     }
