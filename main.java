@@ -108,6 +108,45 @@ public class Main {
                     }
                     break;
                 case "5":
+                    Usuario usuario = new Usuario();
+                    // do {
+                    System.out.println("ingresar nombre de usuario");
+                    String nameUser = valorIngresado.nextLine();
+                    // validaTitulo = libro.validaString(tituloIngresado);
+                    // if (validaTitulo == false) {
+                    // System.out.println("error! ingresar valor válido!");
+                    // } else {
+                    usuario.setName(nameUser);
+                    // }
+                    // } while (validaTitulo == false);
+                    // do {
+                    System.out.println("ingresar número de teléfono: ");
+                    String fonoUser = valorIngresado.nextLine();
+                    // validaAutor = libro.validaString(autorIngresado);
+                    // if (validaAutor == false) {
+                    // System.out.println("error! ingresar valor válido!");
+                    // } else {
+                    usuario.setFoneNumber(fonoUser);
+                    // }
+                    // } while (validaAutor == false);
+                    // do {
+                    // try {
+                    System.out.println("Ingresar E-mail :");
+                    String emailUser = valorIngresado.nextLine();
+                    // int anioIngresado = Integer.parseInt(entrada);
+                    // if (anioIngresado <= 0 || anioIngresado > 2025) {
+                    // System.out.println("error!, ingrese año mayor que 0");
+                    // validaAnio = false;
+                    // } else {
+                    // validaAnio = true;
+                    usuario.setEmail(emailUser);
+                    // }
+                    // } catch (Exception e) {
+                    // System.out.println("error! ingresar valor válido!");
+                    // validaAnio = false;
+                    // }
+                    // }while(validaAnio==false);
+                    biblioteca.agregarUsuario(usuario);
                     break;
                 case "6":
                     System.out.println("¡Adios!.¡Que tengas un buen día!");
