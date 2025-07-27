@@ -21,6 +21,7 @@ public class Main {
         boolean validaLibro = false;
 
         boolean validaNameUser = false;
+        boolean validaFoneUser = false;
 
         // objetos
         // Libro libro = new Libro();
@@ -125,16 +126,18 @@ public class Main {
                          * }
                          */
                     } while (validaNameUser == false);
-                    // do {
-                    System.out.println("ingresar número de teléfono: ");
-                    String fonoUser = valorIngresado.nextLine();
-                    // validaAutor = libro.validaString(autorIngresado);
-                    // if (validaAutor == false) {
-                    // System.out.println("error! ingresar valor válido!");
-                    // } else {
-                    usuario.setFoneNumber(fonoUser);
-                    // }
-                    // } while (validaAutor == false);
+                    do {
+                        System.out.println("ingresar número de teléfono: ");
+                        String fonoUser = valorIngresado.nextLine();
+                        usuario.setFoneNumber(fonoUser);
+                        validaFoneUser = true;
+                        // validaAutor = libro.validaString(autorIngresado);
+                        // if (validaAutor == false) {
+                        // System.out.println("error! ingresar valor válido!");
+                        // } else {
+                        // usuario.setFoneNumber(fonoUser);
+                        // }
+                    } while (validaFoneUser == false);
                     // do {
                     // try {
                     System.out.println("Ingresar E-mail :");
