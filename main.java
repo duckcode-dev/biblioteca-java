@@ -20,6 +20,8 @@ public class Main {
         boolean validaAutor = false;
         boolean validaLibro = false;
 
+        boolean validaNameUser = false;
+
         // objetos
         // Libro libro = new Libro();
         Biblioteca biblioteca = new Biblioteca();
@@ -109,16 +111,20 @@ public class Main {
                     break;
                 case "5":
                     Usuario usuario = new Usuario();
-                    // do {
-                    System.out.println("ingresar nombre de usuario");
-                    String nameUser = valorIngresado.nextLine();
-                    // validaTitulo = libro.validaString(tituloIngresado);
-                    // if (validaTitulo == false) {
-                    // System.out.println("error! ingresar valor válido!");
-                    // } else {
-                    usuario.setName(nameUser);
-                    // }
-                    // } while (validaTitulo == false);
+                    do {
+                        System.out.println("ingresar nombre de usuario");
+                        String nameUser = valorIngresado.nextLine();
+                        usuario.setName(nameUser);
+                        validaNameUser = true;
+                        // validaTitulo = libro.validaString(tituloIngresado);
+                        /*
+                         * if (validaTitulo == false) {
+                         * System.out.println("error! ingresar valor válido!");
+                         * } else {
+                         * usuario.setName(nameUser);
+                         * }
+                         */
+                    } while (validaNameUser == false);
                     // do {
                     System.out.println("ingresar número de teléfono: ");
                     String fonoUser = valorIngresado.nextLine();
