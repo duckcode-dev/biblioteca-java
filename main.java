@@ -22,6 +22,7 @@ public class Main {
 
         boolean validaNameUser = false;
         boolean validaFoneUser = false;
+        boolean validaEmailUser = false;
 
         // objetos
         // Libro libro = new Libro();
@@ -138,23 +139,25 @@ public class Main {
                         // usuario.setFoneNumber(fonoUser);
                         // }
                     } while (validaFoneUser == false);
-                    // do {
-                    // try {
-                    System.out.println("Ingresar E-mail :");
-                    String emailUser = valorIngresado.nextLine();
-                    // int anioIngresado = Integer.parseInt(entrada);
-                    // if (anioIngresado <= 0 || anioIngresado > 2025) {
-                    // System.out.println("error!, ingrese año mayor que 0");
-                    // validaAnio = false;
-                    // } else {
-                    // validaAnio = true;
-                    usuario.setEmail(emailUser);
-                    // }
-                    // } catch (Exception e) {
-                    // System.out.println("error! ingresar valor válido!");
-                    // validaAnio = false;
-                    // }
-                    // }while(validaAnio==false);
+                    do {
+                        // try {
+                        System.out.println("Ingresar E-mail :");
+                        String emailUser = valorIngresado.nextLine();
+                        usuario.setEmail(emailUser);
+                        validaEmailUser = true;
+                        // int anioIngresado = Integer.parseInt(entrada);
+                        // if (anioIngresado <= 0 || anioIngresado > 2025) {
+                        // System.out.println("error!, ingrese año mayor que 0");
+                        // validaAnio = false;
+                        // } else {
+                        // validaAnio = true;
+                        // usuario.setEmail(emailUser);
+                        // }
+                        // } catch (Exception e) {
+                        // System.out.println("error! ingresar valor válido!");
+                        // validaAnio = false;
+                        // }
+                    } while (validaEmailUser == false);
                     biblioteca.agregarUsuario(usuario);
                     break;
                 case "6":
