@@ -116,16 +116,12 @@ public class Main {
                     do {
                         System.out.println("ingresar nombre de usuario");
                         String nameUser = valorIngresado.nextLine();
-                        usuario.setName(nameUser);
-                        validaNameUser = true;
-                        // validaTitulo = libro.validaString(tituloIngresado);
-                        /*
-                         * if (validaTitulo == false) {
-                         * System.out.println("error! ingresar valor válido!");
-                         * } else {
-                         * usuario.setName(nameUser);
-                         * }
-                         */
+                        validaNameUser = usuario.validaString(nameUser);
+                        if (validaNameUser == false) {
+                            System.out.println("error! ingresar usuario válido!");
+                        } else {
+                            usuario.setName(nameUser);
+                        }
                     } while (validaNameUser == false);
                     do {
                         System.out.println("ingresar número de teléfono: ");
