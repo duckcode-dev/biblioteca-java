@@ -124,9 +124,7 @@ public class Main {
                         }
                     } while (validaNameUser == false);
                     do {
-                        System.out.println("ingresar número de teléfono: ");
-                        String fonoUser = valorIngresado.nextLine();
-                        usuario.setFoneNumber(fonoUser);
+
                         validaFoneUser = true;
                         // validaAutor = libro.validaString(autorIngresado);
                         // if (validaAutor == false) {
@@ -134,6 +132,21 @@ public class Main {
                         // } else {
                         // usuario.setFoneNumber(fonoUser);
                         // }
+                        try {
+                            System.out.println("ingresar número de teléfono: ");
+                            String fonoUser = valorIngresado.nextLine();
+                            int fonoIngresado = Integer.parseInt(fonoUser);
+                            if (fonoIngresado <= 0 || fonoIngresado > 999999999) {
+                                System.out.println("error!, ingrese celular mayor que 0");
+                                validaFoneUser = false;
+                            } else {
+                                validaFoneUser = true;
+                                usuario.setFoneNumber(fonoUser);
+                            }
+                        } catch (Exception e) {
+                            System.out.println("error! ingresar valor válido!");
+                            validaFoneUser = false;
+                        }
                     } while (validaFoneUser == false);
                     do {
                         // try {
