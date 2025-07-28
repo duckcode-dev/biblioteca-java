@@ -39,4 +39,9 @@ public class Usuario {
         this.email = email;
     }
 
+    // función para valir cadena ingresada
+    public boolean validaString(String texto) {
+        return texto.matches("[a-zA-Z]+");
+    }
+
 }
