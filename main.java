@@ -128,7 +128,7 @@ public class Main {
                             System.out.println("ingresar número de teléfono: ");
                             String fonoUser = valorIngresado.nextLine();
                             int fonoIngresado = Integer.parseInt(fonoUser);
-                            if (fonoIngresado <= 0 || fonoIngresado > 999999999) {
+                            if (fonoIngresado <= 900000000 || fonoIngresado > 999999999) {
                                 System.out.println("error!, ingrese celular mayor que 0");
                                 validaFoneUser = false;
                             } else {
