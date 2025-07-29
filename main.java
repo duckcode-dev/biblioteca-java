@@ -143,7 +143,7 @@ public class Main {
                     do {
                         System.out.println("Ingresar E-mail :");
                         String emailUser = valorIngresado.nextLine();
-                        validaEmailUser = usuario.validaString(emailUser);
+                        validaEmailUser = usuario.validaEmail(emailUser);
                         if (validaEmailUser == false) {
                             System.out.println("¡error! ¡ingrese E-mail válido!");
                         } else {
