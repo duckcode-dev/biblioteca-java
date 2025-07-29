@@ -124,14 +124,6 @@ public class Main {
                         }
                     } while (validaNameUser == false);
                     do {
-
-                        validaFoneUser = true;
-                        // validaAutor = libro.validaString(autorIngresado);
-                        // if (validaAutor == false) {
-                        // System.out.println("error! ingresar valor válido!");
-                        // } else {
-                        // usuario.setFoneNumber(fonoUser);
-                        // }
                         try {
                             System.out.println("ingresar número de teléfono: ");
                             String fonoUser = valorIngresado.nextLine();
@@ -149,23 +141,14 @@ public class Main {
                         }
                     } while (validaFoneUser == false);
                     do {
-                        // try {
                         System.out.println("Ingresar E-mail :");
                         String emailUser = valorIngresado.nextLine();
-                        usuario.setEmail(emailUser);
-                        validaEmailUser = true;
-                        // int anioIngresado = Integer.parseInt(entrada);
-                        // if (anioIngresado <= 0 || anioIngresado > 2025) {
-                        // System.out.println("error!, ingrese año mayor que 0");
-                        // validaAnio = false;
-                        // } else {
-                        // validaAnio = true;
-                        // usuario.setEmail(emailUser);
-                        // }
-                        // } catch (Exception e) {
-                        // System.out.println("error! ingresar valor válido!");
-                        // validaAnio = false;
-                        // }
+                        validaEmailUser = usuario.validaString(emailUser);
+                        if (validaEmailUser == false) {
+                            System.out.println("¡error! ¡ingrese E-mail válido!");
+                        } else {
+                            usuario.setEmail(emailUser);
+                        }
                     } while (validaEmailUser == false);
                     biblioteca.agregarUsuario(usuario);
                     break;
