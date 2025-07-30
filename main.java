@@ -37,7 +37,8 @@ public class Main {
             System.out.println("4.  Eliminar Libro por ID");
             System.out.println("5.  Ingresar Usuario");
             System.out.println("6.  Mostrar Todos los Usuario");
-            System.out.println("7.  salir");
+            System.out.println("7.  Eliminar Usuario");
+            System.out.println("8.  salir");
             opcionSeleccionada = valorIngresado.nextLine();
             switch (opcionSeleccionada) {
                 case "1":
@@ -160,6 +161,25 @@ public class Main {
                     }
                     break;
                 case "7":
+                    do {
+                        try {
+                            System.out.println("Ingrese Id");
+                            String entrada = valorIngresado.nextLine();
+                            idLibro = Integer.parseInt(entrada);
+                            validaAnio = true;
+                        } catch (Exception e) {
+                            System.out.println("error! ingresar valor ID válido!");
+                            validaAnio = false;
+                        }
+                    } while (validaAnio == false);
+                    validaLibro = biblioteca.eliminarLibro(idLibro, biblioteca.getLibros());
+                    if (validaLibro == true) {
+                        System.out.println("libro eliminado!! :");
+                    } else {
+                        System.out.println("libro no encontrado!! :");
+                    }
+                    break;
+                case "8":
                     System.out.println("¡Adios!.¡Que tengas un buen día!");
                     menuValida = true;
                     break;
