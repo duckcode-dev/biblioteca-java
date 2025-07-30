@@ -15,6 +15,7 @@ public class Main {
         boolean menuValida = false;
         String opcionSeleccionada = "";
         int idLibro = 0;
+        int idUsuario = 0;
         boolean validaTitulo = false;
         boolean validaAnio = false;
         boolean validaAutor = false;
@@ -23,6 +24,7 @@ public class Main {
         boolean validaNameUser = false;
         boolean validaFoneUser = false;
         boolean validaEmailUser = false;
+        boolean validaUsuario = false;
 
         // objetos
         // Libro libro = new Libro();
@@ -163,20 +165,20 @@ public class Main {
                 case "7":
                     do {
                         try {
-                            System.out.println("Ingrese Id");
+                            System.out.println("Ingrese Id usuario:");
                             String entrada = valorIngresado.nextLine();
-                            idLibro = Integer.parseInt(entrada);
+                            idUsuario = Integer.parseInt(entrada);
                             validaAnio = true;
                         } catch (Exception e) {
                             System.out.println("error! ingresar valor ID válido!");
                             validaAnio = false;
                         }
                     } while (validaAnio == false);
-                    validaLibro = biblioteca.eliminarLibro(idLibro, biblioteca.getLibros());
-                    if (validaLibro == true) {
-                        System.out.println("libro eliminado!! :");
+                    validaUsuario = biblioteca.eliminarUsuario(idUsuario, biblioteca.getLibros());
+                    if (validaUsuario == true) {
+                        System.out.println("Usuario eliminado!! :");
                     } else {
-                        System.out.println("libro no encontrado!! :");
+                        System.out.println("Usuario no encontrado!! :");
                     }
                     break;
                 case "8":
