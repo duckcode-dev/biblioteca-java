@@ -54,4 +54,13 @@ public class Usuario {
         return email.matches(emailRegex);
     }
 
+    @Override
+    public String toString() {
+        return "Libro : " +
+                "ID='" + Id + '\'' +
+                " nombre='" + name + '\'' +
+                ", telefono='" + foneNumber + '\'' +
+                ", email=" + email;
+    }
+
 }
