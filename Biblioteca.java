@@ -62,4 +62,17 @@ public class Biblioteca {
         return validador;
     }
 
+    public boolean eliminarUsuario(int idUsuario, Set<Usuario> usuarios) {
+        boolean validador = false;
+        Iterator<Usuario> it = usuarios.iterator();
+        while (it.hasNext()) {
+            Usuario usuarioActual = it.next();
+            if (usuarioActual.getId() == idUsuario) {
+                it.remove();
+                validador = true;
+            }
+        }
+        return validador;
+    }
+
 }

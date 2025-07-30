@@ -174,7 +174,7 @@ public class Main {
                             validaAnio = false;
                         }
                     } while (validaAnio == false);
-                    validaUsuario = biblioteca.eliminarUsuario(idUsuario, biblioteca.getLibros());
+                    validaUsuario = biblioteca.eliminarUsuario(idUsuario, biblioteca.getUsuarios());
                     if (validaUsuario == true) {
                         System.out.println("Usuario eliminado!! :");
                     } else {
