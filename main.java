@@ -154,6 +154,12 @@ public class Main {
                     biblioteca.agregarUsuario(usuario);
                     break;
                 case "6":
+                    System.out.println("Usuarios Ingresados:");
+                    for (Usuario usuarioActual : biblioteca.getUsuarios()) {
+                        System.out.println(usuarioActual);
+                    }
+                    break;
+                case "7":
                     System.out.println("¡Adios!.¡Que tengas un buen día!");
                     menuValida = true;
                     break;
