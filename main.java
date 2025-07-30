@@ -164,6 +164,7 @@ public class Main {
                     menuValida = true;
                     break;
                 default:
+                    System.out.println("Error!! Ingrese valor válido!!");
                     break;
             }
         }
