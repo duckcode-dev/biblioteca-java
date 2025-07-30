@@ -14,7 +14,8 @@ public class Biblioteca {
 
     private Set<Libro> libros = new HashSet<>();
     private Set<Usuario> usuarios = new HashSet<>();
-    private int contadorId = 1; // contador para IDs
+    private int contadorId = 1; // contador para IDs libros
+    private int contadorIdUser = 1;// contador para IDs usuarios
 
     public Set<Libro> getLibros() {
         return libros;
@@ -31,7 +32,7 @@ public class Biblioteca {
     }
 
     public void agregarUsuario(Usuario usuario) {
-        usuario.setId(contadorId++);
+        usuario.setId(contadorIdUser++);
         usuarios.add(usuario);
         System.err.println("Usuario agregado a la lista con id: " + usuario.getId());
     }

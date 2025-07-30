@@ -60,7 +60,7 @@ public class Usuario {
                 "ID='" + Id + '\'' +
                 " nombre='" + name + '\'' +
                 ", telefono='" + foneNumber + '\'' +
-                ", email=" + email;
+                ", email=" + email; 
     }
 
 }
