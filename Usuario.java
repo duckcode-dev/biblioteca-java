@@ -41,7 +41,7 @@ public class Usuario {
 
     // función para valir cadena ingresada
     public boolean validaString(String texto) {
-        return texto.matches("[a-zA-Z]+");
+        return texto.matches("[a-zA-Z ]+");
     }
 
     // función para validar correo electrónico
@@ -60,7 +60,7 @@ public class Usuario {
                 "ID='" + Id + '\'' +
                 " nombre='" + name + '\'' +
                 ", telefono='" + foneNumber + '\'' +
-                ", email=" + email; 
+                ", email=" + email;
     }
 
 }
