@@ -25,6 +25,7 @@ public class Main {
         boolean validaFoneUser = false;
         boolean validaEmailUser = false;
         boolean validaUsuario = false;
+        boolean validaId = false;
 
         // objetos
         // Libro libro = new Libro();
@@ -102,12 +103,12 @@ public class Main {
                             System.out.println("Ingrese Id");
                             String entrada = valorIngresado.nextLine();
                             idLibro = Integer.parseInt(entrada);
-                            validaAnio = true;
+                            validaId = true;
                         } catch (Exception e) {
                             System.out.println("error! ingresar valor ID válido!");
-                            validaAnio = false;
+                            validaId = false;
                         }
-                    } while (validaAnio == false);
+                    } while (validaId == false);
                     validaLibro = biblioteca.eliminarLibro(idLibro, biblioteca.getLibros());
                     if (validaLibro == true) {
                         System.out.println("libro eliminado!! :");
