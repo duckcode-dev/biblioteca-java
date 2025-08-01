@@ -41,7 +41,8 @@ public class Main {
             System.out.println("5.  Ingresar Usuario");
             System.out.println("6.  Mostrar Todos los Usuario");
             System.out.println("7.  Eliminar Usuario");
-            System.out.println("8.  salir");
+            System.out.println("8.  Modificar usuario:");
+            System.out.println("9.  salir");
             opcionSeleccionada = valorIngresado.nextLine();
             switch (opcionSeleccionada) {
                 case "1":
