@@ -45,7 +45,7 @@ public class Libro {
     }
 
     public boolean validaString(String texto) {
-        return texto.matches("[a-zA-Z]+");
+        return texto.matches("[a-zA-Z ]+");
     }
 
     @Override
