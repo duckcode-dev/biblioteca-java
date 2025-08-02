@@ -92,7 +92,7 @@ public class Biblioteca {
             if (usuarioActual.getId() == idUsuario) {
 
                 do {
-                    System.out.println("ingresar nombre de usuario");
+                    System.out.println("ingresar nuevo nombre de usuario");
                     name = valorIngresado.nextLine();
                     validaNameUser = usuarioActual.validaString(name);
                     if (validaNameUser == false) {
@@ -104,7 +104,7 @@ public class Biblioteca {
 
                 do {
                     try {
-                        System.out.println("ingresar número de teléfono: ");
+                        System.out.println("ingresar nuevo número de teléfono: ");
                         fonoUser = valorIngresado.nextLine();
                         int fonoIngresado = Integer.parseInt(fonoUser);
                         if (fonoIngresado <= 900000000 || fonoIngresado > 999999999) {
@@ -121,7 +121,7 @@ public class Biblioteca {
                 } while (validaFoneUser == false);
 
                 do {
-                    System.out.println("Ingresar E-mail :");
+                    System.out.println("Ingresar nuevo E-mail :");
                     emailUser = valorIngresado.nextLine();
                     validaEmailUser = usuarioActual.validaEmail(emailUser);
                     if (validaEmailUser == false) {
