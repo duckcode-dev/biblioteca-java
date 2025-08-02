@@ -184,6 +184,25 @@ public class Main {
                     }
                     break;
                 case "8":
+                    do {
+                        try {
+                            System.out.println("Ingrese Id usuario:");
+                            String entrada = valorIngresado.nextLine();
+                            idUsuario = Integer.parseInt(entrada);
+                            validaId = true;
+                        } catch (Exception e) {
+                            System.out.println("error! ingresar valor ID válido!");
+                            validaId = false;
+                        }
+                    } while (validaId == false);
+                    validaUsuario = biblioteca.modificarUsuario(idUsuario, biblioteca.getUsuarios(), valorIngresado);
+                    if (validaUsuario == true) {
+                        System.out.println("Usuario Modificado!! :");
+                    } else {
+                        System.out.println("Usuario no encontrado!! :");
+                    }
+                    break;
+                case "9":
                     System.out.println("¡Adios!.¡Que tengas un buen día!");
                     menuValida = true;
                     break;
