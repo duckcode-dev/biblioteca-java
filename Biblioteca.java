@@ -97,7 +97,7 @@ public class Biblioteca {
                 System.out.println("3. E-mail");
                 System.out.println("4. Volver a menú principal");
                 seleccionModificar = valorIngresado.nextInt();
-                if (seleccionModificar < 1 || seleccionModificar > 3) {
+                if (seleccionModificar < 1 || seleccionModificar > 4) {
                     System.out.println("error!, ingresar valor válido");
                     validaSelecModificar = false;
                 } else {
