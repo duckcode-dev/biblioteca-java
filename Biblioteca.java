@@ -80,7 +80,7 @@ public class Biblioteca {
         String name;
         String fonoUser;
         String emailUser;
-        int seleccionModificar;
+        String seleccionModificar;
 
         boolean validador = false;
         boolean validaNameUser = false;
@@ -96,9 +96,11 @@ public class Biblioteca {
                 System.out.println("2. Teléfono");
                 System.out.println("3. E-mail");
                 System.out.println("4. Volver a menú principal");
-                seleccionModificar = valorIngresado.nextInt();
-                if (seleccionModificar < 1 || seleccionModificar > 4) {
-                    System.out.println("error!, ingresar valor válido");
+                seleccionModificar = valorIngresado.nextLine();
+                if (!seleccionModificar.equals("1") && !seleccionModificar.equals("2")
+                        && !seleccionModificar.equals("3")
+                        && !seleccionModificar.equals("4")) {
+                    System.out.println("error!, ingresar valor válidoo");
                     validaSelecModificar = false;
                 } else {
                     validaSelecModificar = true;
@@ -106,7 +108,7 @@ public class Biblioteca {
                         Usuario usuarioActual = it.next();
                         if (usuarioActual.getId() == idUsuario) {
                             switch (seleccionModificar) {
-                                case 1:
+                                case "1":
                                     do {
                                         System.out.println("ingresar nuevo nombre de usuario");
                                         name = valorIngresado.nextLine();
@@ -115,10 +117,11 @@ public class Biblioteca {
                                             System.out.println("error! ingresar usuario válido!");
                                         } else {
                                             usuarioActual.setName(name);
+                                            validador = true;
                                         }
                                     } while (validaNameUser == false);
                                     break;
-                                case 2:
+                                case "2":
                                     do {
                                         try {
                                             System.out.println("ingresar nuevo número de teléfono: ");
@@ -130,6 +133,7 @@ public class Biblioteca {
                                             } else {
                                                 validaFoneUser = true;
                                                 usuarioActual.setFoneNumber(fonoUser);
+                                                validador = true;
                                             }
                                         } catch (Exception e) {
                                             System.out.println("error! ingresar valor válido!");
@@ -137,7 +141,7 @@ public class Biblioteca {
                                         }
                                     } while (validaFoneUser == false);
                                     break;
-                                case 3:
+                                case "3":
                                     do {
                                         System.out.println("Ingresar nuevo E-mail :");
                                         emailUser = valorIngresado.nextLine();
@@ -146,13 +150,16 @@ public class Biblioteca {
                                             System.out.println("¡error! ¡ingrese E-mail válido!");
                                         } else {
                                             usuarioActual.setEmail(emailUser);
+                                            validador = true;
                                         }
                                     } while (validaEmailUser == false);
+                                    break;
+                                case "4":
+                                    validador = false;
                                     break;
                                 default:
                                     break;
                             }
-                            validador = true;
                         }
                     }
 
@@ -162,7 +169,7 @@ public class Biblioteca {
                 System.out.println("error! ingresar valor válido!");
                 validaSelecModificar = false;
             }
-        } while (validaSelecModificar);
+        } while (validaSelecModificar == false);
 
         return validador;
     }
