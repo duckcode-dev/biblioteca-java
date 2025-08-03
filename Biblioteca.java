@@ -80,6 +80,7 @@ public class Biblioteca {
         String name;
         String fonoUser;
         String emailUser;
+        int seleccionModificar;
 
         boolean validador = false;
         boolean validaNameUser = false;
@@ -87,53 +88,64 @@ public class Biblioteca {
         boolean validaEmailUser = false;
 
         Iterator<Usuario> it = usuarios.iterator();
-        while (it.hasNext()) {
-            Usuario usuarioActual = it.next();
-            if (usuarioActual.getId() == idUsuario) {
 
-                do {
-                    System.out.println("ingresar nuevo nombre de usuario");
-                    name = valorIngresado.nextLine();
-                    validaNameUser = usuarioActual.validaString(name);
-                    if (validaNameUser == false) {
-                        System.out.println("error! ingresar usuario válido!");
-                    } else {
-                        usuarioActual.setName(name);
-                    }
-                } while (validaNameUser == false);
+        try {
+            System.out.println("***Seleccione que Modificar:");
+            System.out.println("1. Nombre");
+            System.out.println("2. Teléfono");
+            System.out.println("3. E-mail");
 
-                do {
-                    try {
-                        System.out.println("ingresar nuevo número de teléfono: ");
-                        fonoUser = valorIngresado.nextLine();
-                        int fonoIngresado = Integer.parseInt(fonoUser);
-                        if (fonoIngresado <= 900000000 || fonoIngresado > 999999999) {
-                            System.out.println("error!, ingrese celular mayor que 0");
-                            validaFoneUser = false;
+            while (it.hasNext()) {
+                Usuario usuarioActual = it.next();
+                if (usuarioActual.getId() == idUsuario) {
+
+                    do {
+                        System.out.println("ingresar nuevo nombre de usuario");
+                        name = valorIngresado.nextLine();
+                        validaNameUser = usuarioActual.validaString(name);
+                        if (validaNameUser == false) {
+                            System.out.println("error! ingresar usuario válido!");
                         } else {
-                            validaFoneUser = true;
-                            usuarioActual.setFoneNumber(fonoUser);
+                            usuarioActual.setName(name);
                         }
-                    } catch (Exception e) {
-                        System.out.println("error! ingresar valor válido!");
-                        validaFoneUser = false;
-                    }
-                } while (validaFoneUser == false);
+                    } while (validaNameUser == false);
 
-                do {
-                    System.out.println("Ingresar nuevo E-mail :");
-                    emailUser = valorIngresado.nextLine();
-                    validaEmailUser = usuarioActual.validaEmail(emailUser);
-                    if (validaEmailUser == false) {
-                        System.out.println("¡error! ¡ingrese E-mail válido!");
-                    } else {
-                        usuarioActual.setEmail(emailUser);
-                    }
-                } while (validaEmailUser == false);
+                    do {
+                        try {
+                            System.out.println("ingresar nuevo número de teléfono: ");
+                            fonoUser = valorIngresado.nextLine();
+                            int fonoIngresado = Integer.parseInt(fonoUser);
+                            if (fonoIngresado <= 900000000 || fonoIngresado > 999999999) {
+                                System.out.println("error!, ingrese celular mayor que 0");
+                                validaFoneUser = false;
+                            } else {
+                                validaFoneUser = true;
+                                usuarioActual.setFoneNumber(fonoUser);
+                            }
+                        } catch (Exception e) {
+                            System.out.println("error! ingresar valor válido!");
+                            validaFoneUser = false;
+                        }
+                    } while (validaFoneUser == false);
 
-                validador = true;
+                    do {
+                        System.out.println("Ingresar nuevo E-mail :");
+                        emailUser = valorIngresado.nextLine();
+                        validaEmailUser = usuarioActual.validaEmail(emailUser);
+                        if (validaEmailUser == false) {
+                            System.out.println("¡error! ¡ingrese E-mail válido!");
+                        } else {
+                            usuarioActual.setEmail(emailUser);
+                        }
+                    } while (validaEmailUser == false);
+
+                    validador = true;
+                }
             }
+        } catch (Exception e) {
+            // TODO: handle exception
         }
+
         return validador;
     }
 
