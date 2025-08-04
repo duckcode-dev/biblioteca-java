@@ -40,7 +40,7 @@ public class Main {
             System.out.println("4.  Eliminar Libro por ID");
             System.out.println("5.  Ingresar Usuario");
             System.out.println("6.  Mostrar Todos los Usuario");
-            System.out.println("7.  Eliminar Usuario");
+            System.out.println("7.  Eliminar Usuario por ID");
             System.out.println("8.  Modificar usuario:");
             System.out.println("9.  salir");
             opcionSeleccionada = valorIngresado.nextLine();
@@ -199,7 +199,7 @@ public class Main {
                     if (validaUsuario == true) {
                         System.out.println("Usuario Modificado!! :");
                     } else {
-                        System.out.println("Usuario no encontrado!! :");
+                        System.out.println("Usuario no modificado!! :");
                     }
                     break;
                 case "9":
