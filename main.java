@@ -140,6 +140,23 @@ public class Main {
                     }
                     break;
                 case "5":
+                    do {
+                        try {
+                            System.out.println("Ingrese Id");
+                            String entrada = valorIngresado.nextLine();
+                            idLibro = Integer.parseInt(entrada);
+                            validaId = true;
+                        } catch (Exception e) {
+                            System.out.println("error! ingresar valor ID válido!");
+                            validaId = false;
+                        }
+                    } while (validaId == false);
+                    validaLibro = biblioteca.modificarLibro(idLibro, biblioteca.getLibros(), valorIngresado);
+                    if (validaUsuario == true) {
+                        System.out.println("Libro Modificado!! :");
+                    } else {
+                        System.out.println("Libro no modificado!! :");
+                    }
                     break;
                 case "6":
                     Usuario usuario = new Usuario();
