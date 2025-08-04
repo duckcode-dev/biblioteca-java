@@ -88,10 +88,31 @@ public class Main {
                     biblioteca.agregarLibro(libro);
                     break;
                 case "2":
-                    System.out.println("ingresar id de Libro:");
-                    idLibro = valorIngresado.nextInt();
-                    biblioteca.buscarLibro(idLibro, biblioteca.getLibros());
-                    valorIngresado.nextLine(); // limpiar el buffer
+                    do {
+                        try {
+                            System.out.println("Ingrese Id");
+                            String entrada = valorIngresado.nextLine();
+                            idLibro = Integer.parseInt(entrada);
+                            validaId = true;
+                        } catch (Exception e) {
+                            System.out.println("error! ingresar valor ID válido!");
+                            validaId = false;
+                        }
+                    } while (validaId == false);
+                    validaLibro = biblioteca.buscarLibro(idLibro, biblioteca.getLibros());
+                    if (validaLibro == true) {
+                        // System.out.println("libro encontrado!! :");
+                    } else {
+                        System.out.println("libro no encontrado!! :");
+                    }
+                    ///
+                    /*
+                     * System.out.println("ingresar id de Libro:");
+                     * idLibro = valorIngresado.nextInt();
+                     * biblioteca.buscarLibro(idLibro, biblioteca.getLibros());
+                     * valorIngresado.nextLine(); // limpiar el buffer
+                     * break;
+                     */
                     break;
                 case "3":
                     System.out.println("Libros Ingresados:");
@@ -119,7 +140,6 @@ public class Main {
                     }
                     break;
                 case "5":
-
                     break;
                 case "6":
                     Usuario usuario = new Usuario();
