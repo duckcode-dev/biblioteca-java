@@ -38,11 +38,12 @@ public class Main {
             System.out.println("2.  Buscar Libro por ID");
             System.out.println("3.  Mostrar todos los Libros");
             System.out.println("4.  Eliminar Libro por ID");
-            System.out.println("5.  Ingresar Usuario");
-            System.out.println("6.  Mostrar Todos los Usuario");
-            System.out.println("7.  Eliminar Usuario por ID");
-            System.out.println("8.  Modificar usuario");
-            System.out.println("9.  salir");
+            System.out.println("5.  Modificar Libro");
+            System.out.println("6.  Ingresar Usuario");
+            System.out.println("7.  Mostrar Todos los Usuario");
+            System.out.println("8.  Eliminar Usuario por ID");
+            System.out.println("9.  Modificar usuario");
+            System.out.println("10.  salir");
             opcionSeleccionada = valorIngresado.nextLine();
             switch (opcionSeleccionada) {
                 case "1":
@@ -118,6 +119,9 @@ public class Main {
                     }
                     break;
                 case "5":
+
+                    break;
+                case "6":
                     Usuario usuario = new Usuario();
                     do {
                         System.out.println("ingresar nombre de usuario");
@@ -158,13 +162,14 @@ public class Main {
                     } while (validaEmailUser == false);
                     biblioteca.agregarUsuario(usuario);
                     break;
-                case "6":
+
+                case "7":
                     System.out.println("Usuarios Ingresados:");
                     for (Usuario usuarioActual : biblioteca.getUsuarios()) {
                         System.out.println(usuarioActual);
                     }
                     break;
-                case "7":
+                case "8":
                     do {
                         try {
                             System.out.println("Ingrese Id usuario:");
@@ -183,7 +188,7 @@ public class Main {
                         System.out.println("Usuario no encontrado!! :");
                     }
                     break;
-                case "8":
+                case "9":
                     do {
                         try {
                             System.out.println("Ingrese Id usuario:");
@@ -202,7 +207,7 @@ public class Main {
                         System.out.println("Usuario no modificado!! :");
                     }
                     break;
-                case "9":
+                case "10":
                     System.out.println("¡Adios!.¡Que tengas un buen día!");
                     menuValida = true;
                     break;
