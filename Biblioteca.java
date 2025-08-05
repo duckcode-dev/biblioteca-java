@@ -50,15 +50,33 @@ public class Biblioteca {
         return validador;
     }
 
-    public boolean eliminarLibro(int id, Set<Libro> libros) {
+    public boolean eliminarLibro(int id, Set<Libro> libros, Scanner valorIngresado) {
         boolean validador = false;
+        boolean validaBusqueda = false;
+        String confirmacion = "";
+
         Iterator<Libro> it = libros.iterator();
         while (it.hasNext()) {
             Libro libroActual = it.next();
             if (libroActual.getId() == id) {
-                it.remove();
-                validador = true;
+
+                do {
+                    System.out.println("¿Estás seguro de que deseas eliminar el libro " + libroActual.getTitulo()
+                            + "? Esta acción no se puede deshacer. (S/N)");
+                    confirmacion = valorIngresado.nextLine();
+                } while (!confirmacion.equals("S") && !confirmacion.equals("N"));
+
+                if (confirmacion.equals("S")) {
+                    it.remove();
+                    validador = true;
+                } else {
+                    validador = false;
+                }
+                validaBusqueda = true;
             }
+        }
+        if (validaBusqueda == false) {
+            System.out.println("libro no encontrado!!");
         }
         return validador;
     }

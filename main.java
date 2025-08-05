@@ -132,11 +132,14 @@ public class Main {
                             validaId = false;
                         }
                     } while (validaId == false);
-                    validaLibro = biblioteca.eliminarLibro(idLibro, biblioteca.getLibros());
+
+                    System.out.println("");
+
+                    validaLibro = biblioteca.eliminarLibro(idLibro, biblioteca.getLibros(), valorIngresado);
                     if (validaLibro == true) {
                         System.out.println("libro eliminado!! :");
                     } else {
-                        System.out.println("libro no encontrado!! :");
+
                     }
                     break;
                 case "5":
