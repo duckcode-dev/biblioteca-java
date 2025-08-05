@@ -138,8 +138,6 @@ public class Main {
                     validaLibro = biblioteca.eliminarLibro(idLibro, biblioteca.getLibros(), valorIngresado);
                     if (validaLibro == true) {
                         System.out.println("libro eliminado!! :");
-                    } else {
-
                     }
                     break;
                 case "5":
@@ -221,11 +219,9 @@ public class Main {
                             validaAnio = false;
                         }
                     } while (validaAnio == false);
-                    validaUsuario = biblioteca.eliminarUsuario(idUsuario, biblioteca.getUsuarios());
+                    validaUsuario = biblioteca.eliminarUsuario(idUsuario, biblioteca.getUsuarios(), valorIngresado);
                     if (validaUsuario == true) {
                         System.out.println("Usuario eliminado!! :");
-                    } else {
-                        System.out.println("Usuario no encontrado!! :");
                     }
                     break;
                 case "9":
