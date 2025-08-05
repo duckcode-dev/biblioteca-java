@@ -152,7 +152,7 @@ public class Main {
                         }
                     } while (validaId == false);
                     validaLibro = biblioteca.modificarLibro(idLibro, biblioteca.getLibros(), valorIngresado);
-                    if (validaUsuario == true) {
+                    if (validaLibro == true) {
                         System.out.println("Libro Modificado!! :");
                     } else {
                         System.out.println("Libro no modificado!! :");

@@ -174,4 +174,101 @@ public class Biblioteca {
         return validador;
     }
 
+    public boolean modificarLibro(int idLibro, Set<Libro> libros, Scanner valorIngresado) {
+        String titulolibro;
+        String autorLibro;
+        String anioPublicacion;
+        String seleccionModificar;
+
+        boolean validador = false;
+        boolean validaTituloLibro = false;
+        boolean validaAutorLibro = false;
+        boolean validaAnioPublicacion = false;
+        boolean validaSelecModificar = false;
+
+        Iterator<Libro> it = libros.iterator();
+        do {
+            try {
+                System.out.println("Seleccione que Modificar:");
+                System.out.println("1. Título");
+                System.out.println("2. Autor");
+                System.out.println("3. Año de Publicación");
+                System.out.println("4. Volver a menú principal");
+                seleccionModificar = valorIngresado.nextLine();
+                if (!seleccionModificar.equals("1") && !seleccionModificar.equals("2")
+                        && !seleccionModificar.equals("3")
+                        && !seleccionModificar.equals("4")) {
+                    System.out.println("error!, ingresar valor válidoo");
+                    validaSelecModificar = false;
+                } else {
+                    validaSelecModificar = true;
+                    while (it.hasNext()) {
+                        Libro libroActual = it.next();
+                        if (libroActual.getId() == idLibro) {
+                            switch (seleccionModificar) {
+                                case "1":
+                                    do {
+                                        System.out.println("ingresar nuevo Título");
+                                        titulolibro = valorIngresado.nextLine();
+                                        validaTituloLibro = libroActual.validaString(titulolibro);
+                                        if (validaTituloLibro == false) {
+                                            System.out.println("error! ingresar título válido!");
+                                        } else {
+                                            libroActual.setTitulo(titulolibro);
+                                            validador = true;
+                                        }
+                                    } while (validaTituloLibro == false);
+                                    break;
+                                case "2":
+                                    do {
+                                        System.out.println("ingresar nuevo Autor");
+                                        autorLibro = valorIngresado.nextLine();
+                                        validaAutorLibro = libroActual.validaString(autorLibro);
+                                        if (validaAutorLibro == false) {
+                                            System.out.println("error! ingresar autor válido!");
+                                        } else {
+                                            libroActual.setAutor(autorLibro);
+                                            validador = true;
+                                        }
+                                    } while (validaAutorLibro == false);
+                                    break;
+                                case "3":
+                                    do {
+                                        try {
+                                            System.out.println("ingresar nuevo Año de Publicación:");
+                                            anioPublicacion = valorIngresado.nextLine();
+                                            int anioIngresado = Integer.parseInt(anioPublicacion);
+                                            if (anioIngresado <= 0 || anioIngresado > 2025) {
+                                                System.out.println("error!, ingrese año válidoi");
+                                                validaAnioPublicacion = false;
+                                            } else {
+                                                validaAnioPublicacion = true;
+                                                libroActual.setAnioPublicacion(anioIngresado);
+                                                validador = true;
+                                            }
+                                        } catch (Exception e) {
+                                            System.out.println("error! ingresar año válido!");
+                                            validaAnioPublicacion = false;
+                                        }
+                                    } while (validaAnioPublicacion == false);
+                                    break;
+                                case "4":
+                                    validador = false;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+
+                }
+
+            } catch (Exception e) {
+                System.out.println("error! ingresar valor válido!");
+                validaSelecModificar = false;
+            }
+        } while (validaSelecModificar == false);
+        return validador;
+    }
+
 }
