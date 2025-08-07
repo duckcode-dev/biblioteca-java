@@ -85,7 +85,15 @@ public class Main {
                             validaAnio = false;
                         }
                     } while (validaAnio == false);
-                    biblioteca.agregarLibro(libro);
+
+                    validaLibro = biblioteca.buscarLibro(libro, biblioteca.getLibros());
+
+                    if (validaLibro) {
+                        System.out.println("Error, Libro ya está ingresado!!");
+                    } else {
+                        biblioteca.agregarLibro(libro);
+                        System.out.println("¡¡libro ingresado!!");
+                    }
                     break;
                 case "2":
                     do {
