@@ -38,12 +38,18 @@ public class Biblioteca {
         System.err.println("Usuario agregado a la lista con id: " + usuario.getId());
     }
 
-    public boolean buscarLibro(Libro libro, Set<Libro> libros) {
+    public boolean buscarLibro(String titulo, String autor, int anio, Set<Libro> libros) {
         boolean validador = false;
         for (Libro libroActual : libros) {
-            if (libroActual.getTitulo().equals(libro.getTitulo()) && libroActual.getAutor().equals(libro.getAutor())
-                    && libroActual.getAnioPublicacion() == libro.getAnioPublicacion()) {
+            if (libroActual.getTitulo().equals(titulo) && libroActual.getAutor().equals(autor)
+                    && libroActual.getAnioPublicacion() == anio) {
                 validador = true;
+            } else if (libroActual.getTitulo().equals(titulo)) {
+                System.out.println(libroActual);
+            } else if (libroActual.getTitulo().equals(autor)) {
+                System.out.println(libroActual);
+            } else if (libroActual.getAnioPublicacion() == anio) {
+                System.out.println(libroActual);
             }
         }
         return validador;
