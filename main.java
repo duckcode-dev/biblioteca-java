@@ -35,7 +35,7 @@ public class Main {
 
             System.out.println("***BIBLIOTECA DE ALEJANDRÍA***");
             System.out.println("1.  Ingresar Libro");
-            System.out.println("2.  Buscar Libro por ID");
+            System.out.println("2.  Buscar Libro");
             System.out.println("3.  Mostrar todos los Libros");
             System.out.println("4.  Eliminar Libro por ID");
             System.out.println("5.  Modificar Libro");
@@ -86,7 +86,8 @@ public class Main {
                         }
                     } while (validaAnio == false);
 
-                    validaLibro = biblioteca.buscarLibro(libro, biblioteca.getLibros());
+                    validaLibro = biblioteca.buscarLibro(libro.getTitulo(), libro.getAutor(),
+                            libro.getAnioPublicacion(), biblioteca.getLibros());
 
                     if (validaLibro) {
                         System.out.println("Error, Libro ya está ingresado!!");
@@ -96,6 +97,28 @@ public class Main {
                     }
                     break;
                 case "2":
+                    System.out.println("Seleccione tipo de Búsqueda:");
+                    System.out.println("1. Título");
+                    System.out.println("2. Autor");
+                    System.out.println("3. Año de Publicación");
+                    System.out.println("4. Volver a menú principal");
+                    opcionSeleccionada = valorIngresado.nextLine();
+
+                    if (!opcionSeleccionada.equals("1") && !opcionSeleccionada.equals("2")
+                            && !opcionSeleccionada.equals("3")
+                            && !opcionSeleccionada.equals("4")) {
+                        System.out.println("error!, ingresar valor válidoo");
+                    } else {
+                        switch (opcionSeleccionada) {
+                            case "1":
+
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+
                     do {
                         try {
                             System.out.println("Ingrese Id");
@@ -107,20 +130,12 @@ public class Main {
                             validaId = false;
                         }
                     } while (validaId == false);
-                    validaLibro = biblioteca.buscarLibro(idLibro, biblioteca.getLibros());
+                    // validaLibro = biblioteca.buscarLibro(libro, biblioteca.getLibros());
                     if (validaLibro == true) {
                         // System.out.println("libro encontrado!! :");
                     } else {
                         System.out.println("libro no encontrado!! :");
                     }
-                    ///
-                    /*
-                     * System.out.println("ingresar id de Libro:");
-                     * idLibro = valorIngresado.nextInt();
-                     * biblioteca.buscarLibro(idLibro, biblioteca.getLibros());
-                     * valorIngresado.nextLine(); // limpiar el buffer
-                     * break;
-                     */
                     break;
                 case "3":
                     System.out.println("Libros Ingresados:");
