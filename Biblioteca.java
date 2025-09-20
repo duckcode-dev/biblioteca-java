@@ -112,7 +112,7 @@ public class Biblioteca {
             }
         }
         if (validaBusqueda == false) {
-            System.out.println("libro no encontrado!!");
+            System.out.println("usuario no encontrado!!");
         }
         return validador;
     }
