@@ -139,8 +139,12 @@ public class Main {
                     break;
                 case "3":
                     System.out.println("Libros Ingresados:");
-                    for (Libro libroActual : biblioteca.getLibros()) {
-                        System.out.println(libroActual);
+                    if (biblioteca.getLibros().isEmpty()) {
+                        System.out.println("sin resultados...");
+                    } else {
+                        for (Libro libroActual : biblioteca.getLibros()) {
+                            System.out.println(libroActual);
+                        }
                     }
                     break;
                 case "4":
