@@ -20,8 +20,11 @@ public class Biblioteca {
         usuarios.add(usuario);
     }
 
-    public List<Libro> listarLibros() { return libros.stream().toList(); }
-    public List<Usuario> listarUsuarios() { return usuarios.stream().toList(); }
+    /** Devuelve una vista de consulta que no permite alterar el catálogo. */
+    public List<Libro> listarLibros() { return List.copyOf(libros); }
+
+    /** Devuelve una vista de consulta que no permite alterar los usuarios. */
+    public List<Usuario> listarUsuarios() { return List.copyOf(usuarios); }
 
     public boolean existeLibro(String titulo, String autor, int anio) {
         return libros.stream().anyMatch(libro -> libro.getTitulo().equalsIgnoreCase(titulo)
