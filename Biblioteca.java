@@ -1,5 +1,6 @@
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -38,21 +39,28 @@ public class Biblioteca {
         System.err.println("Usuario agregado a la lista con id: " + usuario.getId());
     }
 
-    public boolean buscarLibro(String titulo, String autor, int anio, Set<Libro> libros) {
-        boolean validador = false;
-        for (Libro libroActual : libros) {
-            if (libroActual.getTitulo().equals(titulo) && libroActual.getAutor().equals(autor)
-                    && libroActual.getAnioPublicacion() == anio) {
-                validador = true;
-            } else if (libroActual.getTitulo().equals(titulo)) {
-                System.out.println(libroActual);
-            } else if (libroActual.getTitulo().equals(autor)) {
-                System.out.println(libroActual);
-            } else if (libroActual.getAnioPublicacion() == anio) {
-                System.out.println(libroActual);
-            }
-        }
-        return validador;
+    public boolean existeLibro(String titulo, String autor, int anio) {
+        return libros.stream().anyMatch(libro -> libro.getTitulo().equalsIgnoreCase(titulo)
+                && libro.getAutor().equalsIgnoreCase(autor)
+                && libro.getAnioPublicacion() == anio);
+    }
+
+    public List<Libro> buscarPorTitulo(String titulo) {
+        return libros.stream()
+                .filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo))
+                .toList();
+    }
+
+    public List<Libro> buscarPorAutor(String autor) {
+        return libros.stream()
+                .filter(libro -> libro.getAutor().equalsIgnoreCase(autor))
+                .toList();
+    }
+
+    public List<Libro> buscarPorAnio(int anio) {
+        return libros.stream()
+                .filter(libro -> libro.getAnioPublicacion() == anio)
+                .toList();
     }
 
     public boolean eliminarLibro(int id, Set<Libro> libros, Scanner valorIngresado) {

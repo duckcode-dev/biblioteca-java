@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.List;
 
 /**
  * Descripción: Punto de entrada principal para la aplicación de biblioteca.
@@ -86,8 +87,8 @@ public class Main {
                         }
                     } while (validaAnio == false);
 
-                    validaLibro = biblioteca.buscarLibro(libro.getTitulo(), libro.getAutor(),
-                            libro.getAnioPublicacion(), biblioteca.getLibros());
+                    validaLibro = biblioteca.existeLibro(libro.getTitulo(), libro.getAutor(),
+                            libro.getAnioPublicacion());
 
                     if (validaLibro) {
                         System.out.println("Error, Libro ya está ingresado!!");
@@ -105,36 +106,36 @@ public class Main {
                     opcionSeleccionada = valorIngresado.nextLine();
 
                     if (!opcionSeleccionada.equals("1") && !opcionSeleccionada.equals("2")
-                            && !opcionSeleccionada.equals("3")
-                            && !opcionSeleccionada.equals("4")) {
+                            && !opcionSeleccionada.equals("3") && !opcionSeleccionada.equals("4")) {
                         System.out.println("error!, ingresar valor válidoo");
                     } else {
                         switch (opcionSeleccionada) {
                             case "1":
-
+                                System.out.println("Ingrese título");
+                                mostrarResultados(biblioteca.buscarPorTitulo(valorIngresado.nextLine()));
                                 break;
-
+                            case "2":
+                                System.out.println("Ingrese autor");
+                                mostrarResultados(biblioteca.buscarPorAutor(valorIngresado.nextLine()));
+                                break;
+                            case "3":
+                                do {
+                                    try {
+                                        System.out.println("Ingrese año de publicación");
+                                        idLibro = Integer.parseInt(valorIngresado.nextLine());
+                                        validaId = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("error! ingresar un año válido!");
+                                        validaId = false;
+                                    }
+                                } while (!validaId);
+                                mostrarResultados(biblioteca.buscarPorAnio(idLibro));
+                                break;
+                            case "4":
+                                break;
                             default:
                                 break;
                         }
-                    }
-
-                    do {
-                        try {
-                            System.out.println("Ingrese Id");
-                            String entrada = valorIngresado.nextLine();
-                            idLibro = Integer.parseInt(entrada);
-                            validaId = true;
-                        } catch (Exception e) {
-                            System.out.println("error! ingresar valor ID válido!");
-                            validaId = false;
-                        }
-                    } while (validaId == false);
-                    // validaLibro = biblioteca.buscarLibro(libro, biblioteca.getLibros());
-                    if (validaLibro == true) {
-                        // System.out.println("libro encontrado!! :");
-                    } else {
-                        System.out.println("libro no encontrado!! :");
                     }
                     break;
                 case "3":
@@ -282,6 +283,14 @@ public class Main {
 
         // cerrar objeto Scanner
         valorIngresado.close();
+    }
+
+    private static void mostrarResultados(List<Libro> resultados) {
+        if (resultados.isEmpty()) {
+            System.out.println("libro no encontrado!!");
+            return;
+        }
+        resultados.forEach(System.out::println);
     }
 
 }
