@@ -91,8 +91,8 @@ public class Main {
 
     private static void ingresarUsuario(Biblioteca biblioteca, Scanner entrada) {
         Usuario usuario = new Usuario();
-        usuario.setName(leerTexto(entrada, "Ingrese nombre de usuario"));
-        usuario.setFoneNumber(leerTelefono(entrada));
+        usuario.setNombre(leerTexto(entrada, "Ingrese nombre de usuario"));
+        usuario.setTelefono(leerTelefono(entrada));
         usuario.setEmail(leerEmail(entrada));
         biblioteca.agregarUsuario(usuario);
         System.out.println("Usuario ingresado con ID: " + usuario.getId());
@@ -103,7 +103,7 @@ public class Main {
         var usuario = biblioteca.buscarUsuarioPorId(id);
         if (usuario.isEmpty()) {
             System.out.println("Usuario no encontrado.");
-        } else if (confirmar(entrada, "¿Eliminar '" + usuario.get().getName() + "'? (S/N)")) {
+        } else if (confirmar(entrada, "¿Eliminar al usuario '" + usuario.get().getNombre() + "'? (S/N)")) {
             biblioteca.eliminarUsuario(id);
             System.out.println("Usuario eliminado.");
         }

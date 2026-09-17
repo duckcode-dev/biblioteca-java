@@ -67,11 +67,11 @@ public class Biblioteca {
     }
 
     public boolean actualizarNombreUsuario(int id, String nombre) {
-        return buscarUsuarioPorId(id).map(usuario -> { usuario.setName(nombre); return true; }).orElse(false);
+        return buscarUsuarioPorId(id).map(usuario -> { usuario.setNombre(nombre); return true; }).orElse(false);
     }
 
     public boolean actualizarTelefonoUsuario(int id, String telefono) {
-        return buscarUsuarioPorId(id).map(usuario -> { usuario.setFoneNumber(telefono); return true; }).orElse(false);
+        return buscarUsuarioPorId(id).map(usuario -> { usuario.setTelefono(telefono); return true; }).orElse(false);
     }
 
     public boolean actualizarEmailUsuario(int id, String email) {

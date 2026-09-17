@@ -1,7 +1,7 @@
 public class Usuario {
     private int id;
-    private String name;
-    private String foneNumber;
+    private String nombre;
+    private String telefono;
     private String email;
 
     public Usuario() {
@@ -16,20 +16,20 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getFoneNumber() {
-        return foneNumber;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setFoneNumber(String foneNumber) {
-        this.foneNumber = foneNumber;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getEmail() {
@@ -42,10 +42,10 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Libro : " +
+        return "Usuario: " +
                 "ID='" + id + '\'' +
-                " nombre='" + name + '\'' +
-                ", telefono='" + foneNumber + '\'' +
+                " nombre='" + nombre + '\'' +
+                ", teléfono='" + telefono + '\'' +
                 ", email=" + email;
     }
 
