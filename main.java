@@ -5,7 +5,12 @@ import model.Biblioteca;
 import persistence.PersistenciaExcel;
 import view.ConsolaBiblioteca;
 
-/** Punto de arranque de la aplicación. */
+/**
+ * Clase principal que inicia la aplicación de la biblioteca.
+ * 
+ * @author Patricio Fernández
+ * @author github.com/duckcode-dev
+ */
 public class Main {
     public static void main(String[] args) {
         Biblioteca modelo = new Biblioteca();

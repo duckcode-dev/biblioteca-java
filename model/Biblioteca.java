@@ -5,7 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-/** Modelo y reglas de negocio del catálogo. */
+/**
+ * Clase que representa la biblioteca y maneja la gestión de libros y usuarios.
+ * Permite agregar, buscar, eliminar y actualizar libros y usuarios.
+ * 
+ * @author Patricio Fernández
+ * @author github.com/duckcode-dev
+ */
 public class Biblioteca {
     private final Map<Integer, Libro> libros = new HashMap<>();
     private final Map<Integer, Usuario> usuarios = new HashMap<>();
@@ -32,23 +38,86 @@ public class Biblioteca {
         siguienteIdUsuario = Math.max(siguienteIdUsuario, usuario.getId() + 1);
     }
 
-    public List<Libro> listarLibros() { return List.copyOf(libros.values()); }
-    public List<Usuario> listarUsuarios() { return List.copyOf(usuarios.values()); }
+    public List<Libro> listarLibros() {
+        return List.copyOf(libros.values());
+    }
+
+    public List<Usuario> listarUsuarios() {
+        return List.copyOf(usuarios.values());
+    }
+
     public boolean existeLibro(String titulo, String autor, int anio) {
         return libros.values().stream().anyMatch(libro -> libro.getTitulo().equalsIgnoreCase(titulo)
                 && libro.getAutor().equalsIgnoreCase(autor) && libro.getAnioPublicacion() == anio);
     }
-    public List<Libro> buscarPorTitulo(String titulo) { return libros.values().stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo)).toList(); }
-    public List<Libro> buscarPorAutor(String autor) { return libros.values().stream().filter(libro -> libro.getAutor().equalsIgnoreCase(autor)).toList(); }
-    public List<Libro> buscarPorAnio(int anio) { return libros.values().stream().filter(libro -> libro.getAnioPublicacion() == anio).toList(); }
-    public Optional<Libro> buscarLibroPorId(int id) { return Optional.ofNullable(libros.get(id)); }
-    public Optional<Usuario> buscarUsuarioPorId(int id) { return Optional.ofNullable(usuarios.get(id)); }
-    public boolean eliminarLibro(int id) { return libros.remove(id) != null; }
-    public boolean eliminarUsuario(int id) { return usuarios.remove(id) != null; }
-    public boolean actualizarTituloLibro(int id, String titulo) { return buscarLibroPorId(id).map(libro -> { libro.setTitulo(titulo); return true; }).orElse(false); }
-    public boolean actualizarAutorLibro(int id, String autor) { return buscarLibroPorId(id).map(libro -> { libro.setAutor(autor); return true; }).orElse(false); }
-    public boolean actualizarAnioLibro(int id, int anio) { return buscarLibroPorId(id).map(libro -> { libro.setAnioPublicacion(anio); return true; }).orElse(false); }
-    public boolean actualizarNombreUsuario(int id, String nombre) { return buscarUsuarioPorId(id).map(usuario -> { usuario.setNombre(nombre); return true; }).orElse(false); }
-    public boolean actualizarTelefonoUsuario(int id, String telefono) { return buscarUsuarioPorId(id).map(usuario -> { usuario.setTelefono(telefono); return true; }).orElse(false); }
-    public boolean actualizarEmailUsuario(int id, String email) { return buscarUsuarioPorId(id).map(usuario -> { usuario.setEmail(email); return true; }).orElse(false); }
+
+    public List<Libro> buscarPorTitulo(String titulo) {
+        return libros.values().stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo)).toList();
+    }
+
+    public List<Libro> buscarPorAutor(String autor) {
+        return libros.values().stream().filter(libro -> libro.getAutor().equalsIgnoreCase(autor)).toList();
+    }
+
+    public List<Libro> buscarPorAnio(int anio) {
+        return libros.values().stream().filter(libro -> libro.getAnioPublicacion() == anio).toList();
+    }
+
+    public Optional<Libro> buscarLibroPorId(int id) {
+        return Optional.ofNullable(libros.get(id));
+    }
+
+    public Optional<Usuario> buscarUsuarioPorId(int id) {
+        return Optional.ofNullable(usuarios.get(id));
+    }
+
+    public boolean eliminarLibro(int id) {
+        return libros.remove(id) != null;
+    }
+
+    public boolean eliminarUsuario(int id) {
+        return usuarios.remove(id) != null;
+    }
+
+    public boolean actualizarTituloLibro(int id, String titulo) {
+        return buscarLibroPorId(id).map(libro -> {
+            libro.setTitulo(titulo);
+            return true;
+        }).orElse(false);
+    }
+
+    public boolean actualizarAutorLibro(int id, String autor) {
+        return buscarLibroPorId(id).map(libro -> {
+            libro.setAutor(autor);
+            return true;
+        }).orElse(false);
+    }
+
+    public boolean actualizarAnioLibro(int id, int anio) {
+        return buscarLibroPorId(id).map(libro -> {
+            libro.setAnioPublicacion(anio);
+            return true;
+        }).orElse(false);
+    }
+
+    public boolean actualizarNombreUsuario(int id, String nombre) {
+        return buscarUsuarioPorId(id).map(usuario -> {
+            usuario.setNombre(nombre);
+            return true;
+        }).orElse(false);
+    }
+
+    public boolean actualizarTelefonoUsuario(int id, String telefono) {
+        return buscarUsuarioPorId(id).map(usuario -> {
+            usuario.setTelefono(telefono);
+            return true;
+        }).orElse(false);
+    }
+
+    public boolean actualizarEmailUsuario(int id, String email) {
+        return buscarUsuarioPorId(id).map(usuario -> {
+            usuario.setEmail(email);
+            return true;
+        }).orElse(false);
+    }
 }
