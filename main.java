@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -7,26 +9,47 @@ import java.util.function.Function;
 public class Main {
     public static void main(String[] args) {
         Biblioteca biblioteca = new Biblioteca();
+        PersistenciaExcel persistencia = new PersistenciaExcel(Path.of("biblioteca.xlsx"));
+        boolean persistenciaDisponible = cargarDatos(biblioteca, persistencia);
         try (Scanner entrada = new Scanner(System.in)) {
             boolean ejecutando = true;
             while (ejecutando) {
                 mostrarMenu();
                 switch (entrada.nextLine()) {
-                    case "1" -> ingresarLibro(biblioteca, entrada);
+                    case "1" -> { ingresarLibro(biblioteca, entrada); guardarDatos(biblioteca, persistencia, persistenciaDisponible); }
                     case "2" -> buscarLibro(biblioteca, entrada);
                     case "3" -> mostrarLista(biblioteca.listarLibros());
-                    case "4" -> eliminarLibro(biblioteca, entrada);
-                    case "5" -> modificarLibro(biblioteca, entrada);
-                    case "6" -> ingresarUsuario(biblioteca, entrada);
+                    case "4" -> { eliminarLibro(biblioteca, entrada); guardarDatos(biblioteca, persistencia, persistenciaDisponible); }
+                    case "5" -> { modificarLibro(biblioteca, entrada); guardarDatos(biblioteca, persistencia, persistenciaDisponible); }
+                    case "6" -> { ingresarUsuario(biblioteca, entrada); guardarDatos(biblioteca, persistencia, persistenciaDisponible); }
                     case "7" -> mostrarLista(biblioteca.listarUsuarios());
-                    case "8" -> eliminarUsuario(biblioteca, entrada);
-                    case "9" -> modificarUsuario(biblioteca, entrada);
+                    case "8" -> { eliminarUsuario(biblioteca, entrada); guardarDatos(biblioteca, persistencia, persistenciaDisponible); }
+                    case "9" -> { modificarUsuario(biblioteca, entrada); guardarDatos(biblioteca, persistencia, persistenciaDisponible); }
                     case "10" -> ejecutando = false;
                     default -> System.out.println("Error: ingrese una opción válida.");
                 }
             }
         }
         System.out.println("¡Adiós! ¡Que tengas un buen día!");
+    }
+
+    private static boolean cargarDatos(Biblioteca biblioteca, PersistenciaExcel persistencia) {
+        try {
+            if (persistencia.cargar(biblioteca)) System.out.println("Datos cargados desde biblioteca.xlsx.");
+            return true;
+        } catch (IOException | RuntimeException e) {
+            System.out.println("No se pudo leer biblioteca.xlsx. No se sobrescribirá el archivo existente.");
+            return false;
+        }
+    }
+
+    private static void guardarDatos(Biblioteca biblioteca, PersistenciaExcel persistencia, boolean habilitada) {
+        if (!habilitada) return;
+        try {
+            persistencia.guardar(biblioteca);
+        } catch (IOException e) {
+            System.out.println("No se pudieron guardar los datos en biblioteca.xlsx.");
+        }
     }
 
     private static void mostrarMenu() {

@@ -20,6 +20,18 @@ public class Biblioteca {
         usuarios.put(usuario.getId(), usuario);
     }
 
+    /** Incorpora un libro existente conservando su ID al cargar persistencia. */
+    public void cargarLibro(Libro libro) {
+        libros.put(libro.getId(), libro);
+        contadorId = Math.max(contadorId, libro.getId() + 1);
+    }
+
+    /** Incorpora un usuario existente conservando su ID al cargar persistencia. */
+    public void cargarUsuario(Usuario usuario) {
+        usuarios.put(usuario.getId(), usuario);
+        contadorIdUser = Math.max(contadorIdUser, usuario.getId() + 1);
+    }
+
     /** Devuelve una vista de consulta que no permite alterar el catálogo. */
     public List<Libro> listarLibros() { return List.copyOf(libros.values()); }
 

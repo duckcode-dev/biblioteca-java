@@ -2,6 +2,9 @@
 *.class
 /out/
 /bin/
+/target/
+/.maven-repo/
+/biblioteca.xlsx
 # Ignorar archivos de sistema
 *.log
 .DS_Store

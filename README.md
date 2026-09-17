@@ -23,13 +23,13 @@ javac -version
 Desde la carpeta raíz del proyecto, ejecuta:
 
 ```bash
-javac *.java
-java Main
+mvn compile
+mvn exec:java "-Dexec.mainClass=Main"
 ```
 
 En PowerShell también puedes usar los mismos comandos. La aplicación mostrará un menú interactivo; selecciona la opción `10` para salir.
 
-Los archivos `.class` se generan junto a los archivos fuente y están excluidos del control de versiones.
+La aplicación guarda automáticamente la información en `biblioteca.xlsx`, en la raíz del proyecto. El archivo contiene las hojas `Libros` y `Usuarios`, y se carga al iniciar el programa. Está excluido del control de versiones para no publicar datos locales.
 
 ## Autor
 
