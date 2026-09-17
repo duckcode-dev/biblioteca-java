@@ -16,7 +16,8 @@ public class Libro {
         return id;
     }
 
-    public void setId(int id) {
+    // Solo la capa de dominio asigna IDs al registrar un libro.
+    void setId(int id) {
         this.id = id;
     }
 

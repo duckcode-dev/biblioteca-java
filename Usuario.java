@@ -1,5 +1,5 @@
 public class Usuario {
-    private int Id;
+    private int id;
     private String name;
     private String foneNumber;
     private String email;
@@ -8,11 +8,12 @@ public class Usuario {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
-    public void setId(int id) {
-        Id = id;
+    // Solo la capa de dominio asigna IDs al registrar un usuario.
+    void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -57,7 +58,7 @@ public class Usuario {
     @Override
     public String toString() {
         return "Libro : " +
-                "ID='" + Id + '\'' +
+                "ID='" + id + '\'' +
                 " nombre='" + name + '\'' +
                 ", telefono='" + foneNumber + '\'' +
                 ", email=" + email;
