@@ -1,58 +1,58 @@
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 /** Gestiona el catálogo de libros y usuarios sin depender de la interfaz. */
 public class Biblioteca {
-    private final Set<Libro> libros = new HashSet<>();
-    private final Set<Usuario> usuarios = new HashSet<>();
+    private final Map<Integer, Libro> libros = new HashMap<>();
+    private final Map<Integer, Usuario> usuarios = new HashMap<>();
     private int contadorId = 1;
     private int contadorIdUser = 1;
 
     public void agregarLibro(Libro libro) {
         libro.setId(contadorId++);
-        libros.add(libro);
+        libros.put(libro.getId(), libro);
     }
 
     public void agregarUsuario(Usuario usuario) {
         usuario.setId(contadorIdUser++);
-        usuarios.add(usuario);
+        usuarios.put(usuario.getId(), usuario);
     }
 
     /** Devuelve una vista de consulta que no permite alterar el catálogo. */
-    public List<Libro> listarLibros() { return List.copyOf(libros); }
+    public List<Libro> listarLibros() { return List.copyOf(libros.values()); }
 
     /** Devuelve una vista de consulta que no permite alterar los usuarios. */
-    public List<Usuario> listarUsuarios() { return List.copyOf(usuarios); }
+    public List<Usuario> listarUsuarios() { return List.copyOf(usuarios.values()); }
 
     public boolean existeLibro(String titulo, String autor, int anio) {
-        return libros.stream().anyMatch(libro -> libro.getTitulo().equalsIgnoreCase(titulo)
+        return libros.values().stream().anyMatch(libro -> libro.getTitulo().equalsIgnoreCase(titulo)
                 && libro.getAutor().equalsIgnoreCase(autor) && libro.getAnioPublicacion() == anio);
     }
 
     public List<Libro> buscarPorTitulo(String titulo) {
-        return libros.stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo)).toList();
+        return libros.values().stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo)).toList();
     }
 
     public List<Libro> buscarPorAutor(String autor) {
-        return libros.stream().filter(libro -> libro.getAutor().equalsIgnoreCase(autor)).toList();
+        return libros.values().stream().filter(libro -> libro.getAutor().equalsIgnoreCase(autor)).toList();
     }
 
     public List<Libro> buscarPorAnio(int anio) {
-        return libros.stream().filter(libro -> libro.getAnioPublicacion() == anio).toList();
+        return libros.values().stream().filter(libro -> libro.getAnioPublicacion() == anio).toList();
     }
 
     public Optional<Libro> buscarLibroPorId(int id) {
-        return libros.stream().filter(libro -> libro.getId() == id).findFirst();
+        return Optional.ofNullable(libros.get(id));
     }
 
     public Optional<Usuario> buscarUsuarioPorId(int id) {
-        return usuarios.stream().filter(usuario -> usuario.getId() == id).findFirst();
+        return Optional.ofNullable(usuarios.get(id));
     }
 
-    public boolean eliminarLibro(int id) { return libros.removeIf(libro -> libro.getId() == id); }
-    public boolean eliminarUsuario(int id) { return usuarios.removeIf(usuario -> usuario.getId() == id); }
+    public boolean eliminarLibro(int id) { return libros.remove(id) != null; }
+    public boolean eliminarUsuario(int id) { return usuarios.remove(id) != null; }
 
     public boolean actualizarTituloLibro(int id, String titulo) {
         return buscarLibroPorId(id).map(libro -> { libro.setTitulo(titulo); return true; }).orElse(false);
