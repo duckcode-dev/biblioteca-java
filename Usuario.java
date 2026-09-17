@@ -40,21 +40,6 @@ public class Usuario {
         this.email = email;
     }
 
-    // función para valir cadena ingresada
-    public boolean validaString(String texto) {
-        return texto.matches("[a-zA-Z ]+");
-    }
-
-    // función para validar correo electrónico
-    public boolean validaEmail(String email) {
-        if (email == null || email.isEmpty()) {
-            return false;
-        }
-        // Expresión regular para validar un formato de correo electrónico
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
-        return email.matches(emailRegex);
-    }
-
     @Override
     public String toString() {
         return "Libro : " +

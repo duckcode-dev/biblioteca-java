@@ -1,4 +1,3 @@
-import java.time.Year;
 import java.util.List;
 import java.util.Scanner;
 
@@ -131,7 +130,7 @@ public class Main {
         while (true) {
             System.out.println(mensaje);
             String texto = entrada.nextLine().trim();
-            if (texto.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) return texto;
+            if (Validador.textoValido(texto)) return texto;
             System.out.println("Error: ingrese texto válido.");
         }
     }
@@ -141,7 +140,7 @@ public class Main {
             try {
                 System.out.println("Ingrese año de publicación");
                 int anio = Integer.parseInt(entrada.nextLine());
-                if (anio > 0 && anio <= Year.now().getValue()) return anio;
+                if (Validador.anioValido(anio)) return anio;
             } catch (NumberFormatException ignored) { }
             System.out.println("Error: ingrese un año válido.");
         }
@@ -160,9 +159,9 @@ public class Main {
 
     private static String leerTelefono(Scanner entrada) {
         while (true) {
-            System.out.println("Ingrese número de teléfono (9 dígitos)");
+            System.out.println("Ingrese teléfono chileno (9 dígitos; +56 opcional)");
             String telefono = entrada.nextLine();
-            if (telefono.matches("9\\d{8}")) return telefono;
+            if (Validador.telefonoValido(telefono)) return telefono;
             System.out.println("Error: ingrese un teléfono válido.");
         }
     }
@@ -171,7 +170,7 @@ public class Main {
         while (true) {
             System.out.println("Ingrese e-mail");
             String email = entrada.nextLine();
-            if (email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) return email;
+            if (Validador.emailValido(email)) return email;
             System.out.println("Error: ingrese un e-mail válido.");
         }
     }
