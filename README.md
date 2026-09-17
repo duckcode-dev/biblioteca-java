@@ -7,6 +7,13 @@ Este proyecto es una aplicación de consola básica para la gestión de una bibl
 3. Buscar libros por título, autor o año de publicación.
 4. Validar texto, año, teléfono chileno y e-mail durante el ingreso.
 
+## Estructura
+
+- `model`: entidades, validaciones y reglas del catálogo.
+- `view`: interacción mediante la consola.
+- `controller`: coordinación entre la vista, el modelo y la persistencia.
+- `persistence`: lectura y escritura de `biblioteca.xlsx`.
+
 ## Requisitos
 
 - Java Development Kit (JDK) 17 o superior.

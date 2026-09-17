@@ -1,3 +1,5 @@
+package persistence;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -11,19 +13,20 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/** Lee y escribe el catálogo en un archivo Excel. */
+import model.Biblioteca;
+import model.Libro;
+import model.Usuario;
+
+/** Infraestructura para leer y escribir el catálogo en Excel. */
 public class PersistenciaExcel {
     private static final String HOJA_LIBROS = "Libros";
     private static final String HOJA_USUARIOS = "Usuarios";
     private final Path archivo;
 
-    public PersistenciaExcel(Path archivo) {
-        this.archivo = archivo;
-    }
+    public PersistenciaExcel(Path archivo) { this.archivo = archivo; }
 
     public boolean cargar(Biblioteca biblioteca) throws IOException {
         if (Files.notExists(archivo)) return false;
-
         try (InputStream entrada = Files.newInputStream(archivo); Workbook libroExcel = WorkbookFactory.create(entrada)) {
             cargarLibros(libroExcel.getSheet(HOJA_LIBROS), biblioteca);
             cargarUsuarios(libroExcel.getSheet(HOJA_USUARIOS), biblioteca);
@@ -45,12 +48,9 @@ public class PersistenciaExcel {
         for (int fila = 1; fila <= hoja.getLastRowNum(); fila++) {
             Row datos = hoja.getRow(fila);
             if (datos == null || datos.getCell(0) == null) continue;
-            Libro libro = new Libro();
-            libro.setId((int) datos.getCell(0).getNumericCellValue());
-            libro.setTitulo(formato.formatCellValue(datos.getCell(1)));
-            libro.setAutor(formato.formatCellValue(datos.getCell(2)));
-            libro.setAnioPublicacion((int) datos.getCell(3).getNumericCellValue());
-            biblioteca.cargarLibro(libro);
+            biblioteca.cargarLibro(new Libro((int) datos.getCell(0).getNumericCellValue(),
+                    formato.formatCellValue(datos.getCell(1)), formato.formatCellValue(datos.getCell(2)),
+                    (int) datos.getCell(3).getNumericCellValue()));
         }
     }
 
@@ -60,12 +60,9 @@ public class PersistenciaExcel {
         for (int fila = 1; fila <= hoja.getLastRowNum(); fila++) {
             Row datos = hoja.getRow(fila);
             if (datos == null || datos.getCell(0) == null) continue;
-            Usuario usuario = new Usuario();
-            usuario.setId((int) datos.getCell(0).getNumericCellValue());
-            usuario.setNombre(formato.formatCellValue(datos.getCell(1)));
-            usuario.setTelefono(formato.formatCellValue(datos.getCell(2)));
-            usuario.setEmail(formato.formatCellValue(datos.getCell(3)));
-            biblioteca.cargarUsuario(usuario);
+            biblioteca.cargarUsuario(new Usuario((int) datos.getCell(0).getNumericCellValue(),
+                    formato.formatCellValue(datos.getCell(1)), formato.formatCellValue(datos.getCell(2)),
+                    formato.formatCellValue(datos.getCell(3))));
         }
     }
 
@@ -95,9 +92,6 @@ public class PersistenciaExcel {
 
     private void escribirEncabezados(Sheet hoja, String... encabezados) {
         Row fila = hoja.createRow(0);
-        for (int columna = 0; columna < encabezados.length; columna++) {
-            fila.createCell(columna).setCellValue(encabezados[columna]);
-            hoja.autoSizeColumn(columna);
-        }
+        for (int columna = 0; columna < encabezados.length; columna++) fila.createCell(columna).setCellValue(encabezados[columna]);
     }
 }
