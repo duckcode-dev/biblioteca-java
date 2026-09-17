@@ -1,5 +1,7 @@
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.Function;
 
 /** Interfaz de consola de la aplicación. */
 public class Main {
@@ -12,11 +14,11 @@ public class Main {
                 switch (entrada.nextLine()) {
                     case "1" -> ingresarLibro(biblioteca, entrada);
                     case "2" -> buscarLibro(biblioteca, entrada);
-                    case "3" -> mostrarResultados(biblioteca.listarLibros());
+                    case "3" -> mostrarLista(biblioteca.listarLibros());
                     case "4" -> eliminarLibro(biblioteca, entrada);
                     case "5" -> modificarLibro(biblioteca, entrada);
                     case "6" -> ingresarUsuario(biblioteca, entrada);
-                    case "7" -> mostrarUsuarios(biblioteca.listarUsuarios());
+                    case "7" -> mostrarLista(biblioteca.listarUsuarios());
                     case "8" -> eliminarUsuario(biblioteca, entrada);
                     case "9" -> modificarUsuario(biblioteca, entrada);
                     case "10" -> ejecutando = false;
@@ -63,13 +65,8 @@ public class Main {
 
     private static void eliminarLibro(Biblioteca biblioteca, Scanner entrada) {
         int id = leerId(entrada, "Ingrese ID del libro");
-        var libro = biblioteca.buscarLibroPorId(id);
-        if (libro.isEmpty()) {
-            System.out.println("Libro no encontrado.");
-        } else if (confirmar(entrada, "¿Eliminar '" + libro.get().getTitulo() + "'? (S/N)")) {
-            biblioteca.eliminarLibro(id);
-            System.out.println("Libro eliminado.");
-        }
+        eliminarPorId(id, entrada, "Libro", biblioteca::buscarLibroPorId, biblioteca::eliminarLibro,
+                libro -> "¿Eliminar el libro '" + libro.getTitulo() + "'? (S/N)");
     }
 
     private static void modificarLibro(Biblioteca biblioteca, Scanner entrada) {
@@ -100,13 +97,8 @@ public class Main {
 
     private static void eliminarUsuario(Biblioteca biblioteca, Scanner entrada) {
         int id = leerId(entrada, "Ingrese ID del usuario");
-        var usuario = biblioteca.buscarUsuarioPorId(id);
-        if (usuario.isEmpty()) {
-            System.out.println("Usuario no encontrado.");
-        } else if (confirmar(entrada, "¿Eliminar al usuario '" + usuario.get().getNombre() + "'? (S/N)")) {
-            biblioteca.eliminarUsuario(id);
-            System.out.println("Usuario eliminado.");
-        }
+        eliminarPorId(id, entrada, "Usuario", biblioteca::buscarUsuarioPorId, biblioteca::eliminarUsuario,
+                usuario -> "¿Eliminar al usuario '" + usuario.getNombre() + "'? (S/N)");
     }
 
     private static void modificarUsuario(Biblioteca biblioteca, Scanner entrada) {
@@ -185,13 +177,24 @@ public class Main {
         }
     }
 
-    private static void mostrarResultados(List<Libro> resultados) {
-        if (resultados.isEmpty()) System.out.println("Sin resultados.");
-        else resultados.forEach(System.out::println);
+    private static <T> void eliminarPorId(int id, Scanner entrada, String tipo,
+            Function<Integer, Optional<T>> buscar, Function<Integer, Boolean> eliminar,
+            Function<T, String> mensajeConfirmacion) {
+        Optional<T> entidad = buscar.apply(id);
+        if (entidad.isEmpty()) {
+            System.out.println(tipo + " no encontrado.");
+        } else if (confirmar(entrada, mensajeConfirmacion.apply(entidad.get()))) {
+            eliminar.apply(id);
+            System.out.println(tipo + " eliminado.");
+        }
     }
 
-    private static void mostrarUsuarios(List<Usuario> usuarios) {
-        if (usuarios.isEmpty()) System.out.println("Sin resultados.");
-        else usuarios.forEach(System.out::println);
+    private static void mostrarResultados(List<Libro> resultados) {
+        mostrarLista(resultados);
+    }
+
+    private static void mostrarLista(List<?> elementos) {
+        if (elementos.isEmpty()) System.out.println("Sin resultados.");
+        else elementos.forEach(System.out::println);
     }
 }
