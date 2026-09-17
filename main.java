@@ -1,296 +1,198 @@
-import java.util.Scanner;
+import java.time.Year;
 import java.util.List;
+import java.util.Scanner;
 
-/**
- * Descripción: Punto de entrada principal para la aplicación de biblioteca.
- * Nombre del archivo: Main.java
- * 
- * @author: duckcode-dev
- * @version 1.0
- */
+/** Interfaz de consola de la aplicación. */
 public class Main {
     public static void main(String[] args) {
-
-        Scanner valorIngresado = new Scanner(System.in);
-
-        boolean menuValida = false;
-        String opcionSeleccionada = "";
-        int idLibro = 0;
-        int idUsuario = 0;
-        boolean validaTitulo = false;
-        boolean validaAnio = false;
-        boolean validaAutor = false;
-        boolean validaLibro = false;
-
-        boolean validaNameUser = false;
-        boolean validaFoneUser = false;
-        boolean validaEmailUser = false;
-        boolean validaUsuario = false;
-        boolean validaId = false;
-
-        // objetos
-        // Libro libro = new Libro();
         Biblioteca biblioteca = new Biblioteca();
-
-        while (menuValida == false) {
-
-            System.out.println("***BIBLIOTECA DE ALEJANDRÍA***");
-            System.out.println("1.  Ingresar Libro");
-            System.out.println("2.  Buscar Libro");
-            System.out.println("3.  Mostrar todos los Libros");
-            System.out.println("4.  Eliminar Libro por ID");
-            System.out.println("5.  Modificar Libro");
-            System.out.println("6.  Ingresar Usuario");
-            System.out.println("7.  Mostrar Todos los Usuario");
-            System.out.println("8.  Eliminar Usuario por ID");
-            System.out.println("9.  Modificar usuario");
-            System.out.println("10.  salir");
-            opcionSeleccionada = valorIngresado.nextLine();
-            switch (opcionSeleccionada) {
-                case "1":
-                    Libro libro = new Libro();
-                    do {
-                        System.out.println("ingresar título de libro");
-                        String tituloIngresado = valorIngresado.nextLine();
-                        validaTitulo = libro.validaString(tituloIngresado);
-                        if (validaTitulo == false) {
-                            System.out.println("error! ingresar valor válido!");
-                        } else {
-                            libro.setTitulo(tituloIngresado);
-                        }
-                    } while (validaTitulo == false);
-                    do {
-                        System.out.println("ingresar autor de libro");
-                        String autorIngresado = valorIngresado.nextLine();
-                        validaAutor = libro.validaString(autorIngresado);
-                        if (validaAutor == false) {
-                            System.out.println("error! ingresar valor válido!");
-                        } else {
-                            libro.setAutor(autorIngresado);
-                        }
-                    } while (validaAutor == false);
-                    do {
-                        try {
-                            System.out.println("año de publicación");
-                            String entrada = valorIngresado.nextLine();
-                            int anioIngresado = Integer.parseInt(entrada);
-                            if (anioIngresado <= 0 || anioIngresado > 2025) {
-                                System.out.println("error!, ingrese año mayor que 0");
-                                validaAnio = false;
-                            } else {
-                                validaAnio = true;
-                                libro.setAnioPublicacion(anioIngresado);
-                            }
-                        } catch (Exception e) {
-                            System.out.println("error! ingresar valor válido!");
-                            validaAnio = false;
-                        }
-                    } while (validaAnio == false);
-
-                    validaLibro = biblioteca.existeLibro(libro.getTitulo(), libro.getAutor(),
-                            libro.getAnioPublicacion());
-
-                    if (validaLibro) {
-                        System.out.println("Error, Libro ya está ingresado!!");
-                    } else {
-                        biblioteca.agregarLibro(libro);
-                        System.out.println("¡¡libro ingresado!!");
-                    }
-                    break;
-                case "2":
-                    System.out.println("Seleccione tipo de Búsqueda:");
-                    System.out.println("1. Título");
-                    System.out.println("2. Autor");
-                    System.out.println("3. Año de Publicación");
-                    System.out.println("4. Volver a menú principal");
-                    opcionSeleccionada = valorIngresado.nextLine();
-
-                    if (!opcionSeleccionada.equals("1") && !opcionSeleccionada.equals("2")
-                            && !opcionSeleccionada.equals("3") && !opcionSeleccionada.equals("4")) {
-                        System.out.println("error!, ingresar valor válidoo");
-                    } else {
-                        switch (opcionSeleccionada) {
-                            case "1":
-                                System.out.println("Ingrese título");
-                                mostrarResultados(biblioteca.buscarPorTitulo(valorIngresado.nextLine()));
-                                break;
-                            case "2":
-                                System.out.println("Ingrese autor");
-                                mostrarResultados(biblioteca.buscarPorAutor(valorIngresado.nextLine()));
-                                break;
-                            case "3":
-                                do {
-                                    try {
-                                        System.out.println("Ingrese año de publicación");
-                                        idLibro = Integer.parseInt(valorIngresado.nextLine());
-                                        validaId = true;
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("error! ingresar un año válido!");
-                                        validaId = false;
-                                    }
-                                } while (!validaId);
-                                mostrarResultados(biblioteca.buscarPorAnio(idLibro));
-                                break;
-                            case "4":
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    break;
-                case "3":
-                    System.out.println("Libros Ingresados:");
-                    if (biblioteca.getLibros().isEmpty()) {
-                        System.out.println("sin resultados...");
-                    } else {
-                        for (Libro libroActual : biblioteca.getLibros()) {
-                            System.out.println(libroActual);
-                        }
-                    }
-                    break;
-                case "4":
-                    do {
-                        try {
-                            System.out.println("Ingrese Id");
-                            String entrada = valorIngresado.nextLine();
-                            idLibro = Integer.parseInt(entrada);
-                            validaId = true;
-                        } catch (Exception e) {
-                            System.out.println("error! ingresar valor ID válido!");
-                            validaId = false;
-                        }
-                    } while (validaId == false);
-
-                    System.out.println("");
-
-                    validaLibro = biblioteca.eliminarLibro(idLibro, biblioteca.getLibros(), valorIngresado);
-                    if (validaLibro == true) {
-                        System.out.println("libro eliminado!! :");
-                    }
-                    break;
-                case "5":
-                    do {
-                        try {
-                            System.out.println("Ingrese Id");
-                            String entrada = valorIngresado.nextLine();
-                            idLibro = Integer.parseInt(entrada);
-                            validaId = true;
-                        } catch (Exception e) {
-                            System.out.println("error! ingresar valor ID válido!");
-                            validaId = false;
-                        }
-                    } while (validaId == false);
-                    validaLibro = biblioteca.modificarLibro(idLibro, biblioteca.getLibros(), valorIngresado);
-                    if (validaLibro == true) {
-                        System.out.println("Libro Modificado!! :");
-                    } else {
-                        System.out.println("Libro no modificado!! :");
-                    }
-                    break;
-                case "6":
-                    Usuario usuario = new Usuario();
-                    do {
-                        System.out.println("ingresar nombre de usuario");
-                        String nameUser = valorIngresado.nextLine();
-                        validaNameUser = usuario.validaString(nameUser);
-                        if (validaNameUser == false) {
-                            System.out.println("error! ingresar usuario válido!");
-                        } else {
-                            usuario.setName(nameUser);
-                        }
-                    } while (validaNameUser == false);
-                    do {
-                        try {
-                            System.out.println("ingresar número de teléfono: ");
-                            String fonoUser = valorIngresado.nextLine();
-                            int fonoIngresado = Integer.parseInt(fonoUser);
-                            if (fonoIngresado <= 900000000 || fonoIngresado > 999999999) {
-                                System.out.println("error!, ingrese celular mayor que 0");
-                                validaFoneUser = false;
-                            } else {
-                                validaFoneUser = true;
-                                usuario.setFoneNumber(fonoUser);
-                            }
-                        } catch (Exception e) {
-                            System.out.println("error! ingresar valor válido!");
-                            validaFoneUser = false;
-                        }
-                    } while (validaFoneUser == false);
-                    do {
-                        System.out.println("Ingresar E-mail :");
-                        String emailUser = valorIngresado.nextLine();
-                        validaEmailUser = usuario.validaEmail(emailUser);
-                        if (validaEmailUser == false) {
-                            System.out.println("¡error! ¡ingrese E-mail válido!");
-                        } else {
-                            usuario.setEmail(emailUser);
-                        }
-                    } while (validaEmailUser == false);
-                    biblioteca.agregarUsuario(usuario);
-                    break;
-
-                case "7":
-                    System.out.println("Usuarios Ingresados:");
-                    for (Usuario usuarioActual : biblioteca.getUsuarios()) {
-                        System.out.println(usuarioActual);
-                    }
-                    break;
-                case "8":
-                    do {
-                        try {
-                            System.out.println("Ingrese Id usuario:");
-                            String entrada = valorIngresado.nextLine();
-                            idUsuario = Integer.parseInt(entrada);
-                            validaAnio = true;
-                        } catch (Exception e) {
-                            System.out.println("error! ingresar valor ID válido!");
-                            validaAnio = false;
-                        }
-                    } while (validaAnio == false);
-                    validaUsuario = biblioteca.eliminarUsuario(idUsuario, biblioteca.getUsuarios(), valorIngresado);
-                    if (validaUsuario == true) {
-                        System.out.println("Usuario eliminado!! :");
-                    }
-                    break;
-                case "9":
-                    do {
-                        try {
-                            System.out.println("Ingrese Id usuario:");
-                            String entrada = valorIngresado.nextLine();
-                            idUsuario = Integer.parseInt(entrada);
-                            validaId = true;
-                        } catch (Exception e) {
-                            System.out.println("error! ingresar valor ID válido!");
-                            validaId = false;
-                        }
-                    } while (validaId == false);
-                    validaUsuario = biblioteca.modificarUsuario(idUsuario, biblioteca.getUsuarios(), valorIngresado);
-                    if (validaUsuario == true) {
-                        System.out.println("Usuario Modificado!! :");
-                    } else {
-                        System.out.println("Usuario no modificado!! :");
-                    }
-                    break;
-                case "10":
-                    System.out.println("¡Adios!.¡Que tengas un buen día!");
-                    menuValida = true;
-                    break;
-                default:
-                    System.out.println("Error!! Ingrese valor válido!!");
-                    break;
+        try (Scanner entrada = new Scanner(System.in)) {
+            boolean ejecutando = true;
+            while (ejecutando) {
+                mostrarMenu();
+                switch (entrada.nextLine()) {
+                    case "1" -> ingresarLibro(biblioteca, entrada);
+                    case "2" -> buscarLibro(biblioteca, entrada);
+                    case "3" -> mostrarResultados(biblioteca.listarLibros());
+                    case "4" -> eliminarLibro(biblioteca, entrada);
+                    case "5" -> modificarLibro(biblioteca, entrada);
+                    case "6" -> ingresarUsuario(biblioteca, entrada);
+                    case "7" -> mostrarUsuarios(biblioteca.listarUsuarios());
+                    case "8" -> eliminarUsuario(biblioteca, entrada);
+                    case "9" -> modificarUsuario(biblioteca, entrada);
+                    case "10" -> ejecutando = false;
+                    default -> System.out.println("Error: ingrese una opción válida.");
+                }
             }
         }
+        System.out.println("¡Adiós! ¡Que tengas un buen día!");
+    }
 
-        // cerrar objeto Scanner
-        valorIngresado.close();
+    private static void mostrarMenu() {
+        System.out.println("*** BIBLIOTECA DE ALEJANDRÍA ***");
+        System.out.println("1. Ingresar libro\n2. Buscar libro\n3. Mostrar libros\n4. Eliminar libro por ID");
+        System.out.println("5. Modificar libro\n6. Ingresar usuario\n7. Mostrar usuarios");
+        System.out.println("8. Eliminar usuario por ID\n9. Modificar usuario\n10. Salir");
+    }
+
+    private static void ingresarLibro(Biblioteca biblioteca, Scanner entrada) {
+        String titulo = leerTexto(entrada, "Ingrese título del libro");
+        String autor = leerTexto(entrada, "Ingrese autor del libro");
+        int anio = leerAnio(entrada);
+        if (biblioteca.existeLibro(titulo, autor, anio)) {
+            System.out.println("Error: el libro ya está ingresado.");
+            return;
+        }
+        Libro libro = new Libro();
+        libro.setTitulo(titulo);
+        libro.setAutor(autor);
+        libro.setAnioPublicacion(anio);
+        biblioteca.agregarLibro(libro);
+        System.out.println("Libro ingresado con ID: " + libro.getId());
+    }
+
+    private static void buscarLibro(Biblioteca biblioteca, Scanner entrada) {
+        System.out.println("Buscar por: 1. Título  2. Autor  3. Año  4. Volver");
+        switch (entrada.nextLine()) {
+            case "1" -> mostrarResultados(biblioteca.buscarPorTitulo(leerTexto(entrada, "Ingrese título")));
+            case "2" -> mostrarResultados(biblioteca.buscarPorAutor(leerTexto(entrada, "Ingrese autor")));
+            case "3" -> mostrarResultados(biblioteca.buscarPorAnio(leerAnio(entrada)));
+            case "4" -> { }
+            default -> System.out.println("Error: ingrese una opción válida.");
+        }
+    }
+
+    private static void eliminarLibro(Biblioteca biblioteca, Scanner entrada) {
+        int id = leerId(entrada, "Ingrese ID del libro");
+        var libro = biblioteca.buscarLibroPorId(id);
+        if (libro.isEmpty()) {
+            System.out.println("Libro no encontrado.");
+        } else if (confirmar(entrada, "¿Eliminar '" + libro.get().getTitulo() + "'? (S/N)")) {
+            biblioteca.eliminarLibro(id);
+            System.out.println("Libro eliminado.");
+        }
+    }
+
+    private static void modificarLibro(Biblioteca biblioteca, Scanner entrada) {
+        int id = leerId(entrada, "Ingrese ID del libro");
+        if (biblioteca.buscarLibroPorId(id).isEmpty()) {
+            System.out.println("Libro no encontrado.");
+            return;
+        }
+        System.out.println("Modificar: 1. Título  2. Autor  3. Año  4. Volver");
+        boolean modificado = switch (entrada.nextLine()) {
+            case "1" -> biblioteca.actualizarTituloLibro(id, leerTexto(entrada, "Ingrese nuevo título"));
+            case "2" -> biblioteca.actualizarAutorLibro(id, leerTexto(entrada, "Ingrese nuevo autor"));
+            case "3" -> biblioteca.actualizarAnioLibro(id, leerAnio(entrada));
+            case "4" -> false;
+            default -> { System.out.println("Error: ingrese una opción válida."); yield false; }
+        };
+        if (modificado) System.out.println("Libro modificado.");
+    }
+
+    private static void ingresarUsuario(Biblioteca biblioteca, Scanner entrada) {
+        Usuario usuario = new Usuario();
+        usuario.setName(leerTexto(entrada, "Ingrese nombre de usuario"));
+        usuario.setFoneNumber(leerTelefono(entrada));
+        usuario.setEmail(leerEmail(entrada));
+        biblioteca.agregarUsuario(usuario);
+        System.out.println("Usuario ingresado con ID: " + usuario.getId());
+    }
+
+    private static void eliminarUsuario(Biblioteca biblioteca, Scanner entrada) {
+        int id = leerId(entrada, "Ingrese ID del usuario");
+        var usuario = biblioteca.buscarUsuarioPorId(id);
+        if (usuario.isEmpty()) {
+            System.out.println("Usuario no encontrado.");
+        } else if (confirmar(entrada, "¿Eliminar '" + usuario.get().getName() + "'? (S/N)")) {
+            biblioteca.eliminarUsuario(id);
+            System.out.println("Usuario eliminado.");
+        }
+    }
+
+    private static void modificarUsuario(Biblioteca biblioteca, Scanner entrada) {
+        int id = leerId(entrada, "Ingrese ID del usuario");
+        if (biblioteca.buscarUsuarioPorId(id).isEmpty()) {
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
+        System.out.println("Modificar: 1. Nombre  2. Teléfono  3. E-mail  4. Volver");
+        boolean modificado = switch (entrada.nextLine()) {
+            case "1" -> biblioteca.actualizarNombreUsuario(id, leerTexto(entrada, "Ingrese nuevo nombre"));
+            case "2" -> biblioteca.actualizarTelefonoUsuario(id, leerTelefono(entrada));
+            case "3" -> biblioteca.actualizarEmailUsuario(id, leerEmail(entrada));
+            case "4" -> false;
+            default -> { System.out.println("Error: ingrese una opción válida."); yield false; }
+        };
+        if (modificado) System.out.println("Usuario modificado.");
+    }
+
+    private static String leerTexto(Scanner entrada, String mensaje) {
+        while (true) {
+            System.out.println(mensaje);
+            String texto = entrada.nextLine().trim();
+            if (texto.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) return texto;
+            System.out.println("Error: ingrese texto válido.");
+        }
+    }
+
+    private static int leerAnio(Scanner entrada) {
+        while (true) {
+            try {
+                System.out.println("Ingrese año de publicación");
+                int anio = Integer.parseInt(entrada.nextLine());
+                if (anio > 0 && anio <= Year.now().getValue()) return anio;
+            } catch (NumberFormatException ignored) { }
+            System.out.println("Error: ingrese un año válido.");
+        }
+    }
+
+    private static int leerId(Scanner entrada, String mensaje) {
+        while (true) {
+            try {
+                System.out.println(mensaje);
+                int id = Integer.parseInt(entrada.nextLine());
+                if (id > 0) return id;
+            } catch (NumberFormatException ignored) { }
+            System.out.println("Error: ingrese un ID válido.");
+        }
+    }
+
+    private static String leerTelefono(Scanner entrada) {
+        while (true) {
+            System.out.println("Ingrese número de teléfono (9 dígitos)");
+            String telefono = entrada.nextLine();
+            if (telefono.matches("9\\d{8}")) return telefono;
+            System.out.println("Error: ingrese un teléfono válido.");
+        }
+    }
+
+    private static String leerEmail(Scanner entrada) {
+        while (true) {
+            System.out.println("Ingrese e-mail");
+            String email = entrada.nextLine();
+            if (email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) return email;
+            System.out.println("Error: ingrese un e-mail válido.");
+        }
+    }
+
+    private static boolean confirmar(Scanner entrada, String mensaje) {
+        while (true) {
+            System.out.println(mensaje);
+            String respuesta = entrada.nextLine().trim();
+            if (respuesta.equalsIgnoreCase("S")) return true;
+            if (respuesta.equalsIgnoreCase("N")) return false;
+            System.out.println("Responda S o N.");
+        }
     }
 
     private static void mostrarResultados(List<Libro> resultados) {
-        if (resultados.isEmpty()) {
-            System.out.println("libro no encontrado!!");
-            return;
-        }
-        resultados.forEach(System.out::println);
+        if (resultados.isEmpty()) System.out.println("Sin resultados.");
+        else resultados.forEach(System.out::println);
     }
 
+    private static void mostrarUsuarios(List<Usuario> usuarios) {
+        if (usuarios.isEmpty()) System.out.println("Sin resultados.");
+        else usuarios.forEach(System.out::println);
+    }
 }
