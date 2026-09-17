@@ -1,15 +1,35 @@
 # Biblioteca Java
 
-Este proyecto es una aplicación básica para la gestión de una biblioteca. Permite:
+Este proyecto es una aplicación de consola básica para la gestión de una biblioteca. Permite:
 
-1. Agregar un libro (título, autor, año de publicación).
-2. Buscar un libro por título (insensible a mayúsculas/minúsculas).
-3. Mostrar todos los libros registrados.
-4. Eliminar Libro por ID.
+1. Registrar, buscar, listar, modificar y eliminar libros.
+2. Registrar, listar, modificar y eliminar usuarios.
+3. Buscar libros por título, autor o año de publicación.
+4. Validar texto, año, teléfono chileno y e-mail durante el ingreso.
 
-## Instalación
+## Requisitos
 
-## Uso
+- Java Development Kit (JDK) 17 o superior.
+- Una terminal (PowerShell, CMD, Bash u otra compatible).
+
+Comprueba la instalación de Java con:
+
+```bash
+javac -version
+```
+
+## Compilación y ejecución
+
+Desde la carpeta raíz del proyecto, ejecuta:
+
+```bash
+javac *.java
+java Main
+```
+
+En PowerShell también puedes usar los mismos comandos. La aplicación mostrará un menú interactivo; selecciona la opción `10` para salir.
+
+Los archivos `.class` se generan junto a los archivos fuente y están excluidos del control de versiones.
 
 ## Autor
 
