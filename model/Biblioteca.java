@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Comparator;
 
 /**
  * Clase que representa la biblioteca y maneja la gestión de libros y usuarios.
@@ -39,11 +40,11 @@ public class Biblioteca {
     }
 
     public List<Libro> listarLibros() {
-        return List.copyOf(libros.values());
+        return libros.values().stream().sorted(Comparator.comparingInt(Libro::getId)).toList();
     }
 
     public List<Usuario> listarUsuarios() {
-        return List.copyOf(usuarios.values());
+        return usuarios.values().stream().sorted(Comparator.comparingInt(Usuario::getId)).toList();
     }
 
     public boolean existeLibro(String titulo, String autor, int anio) {
@@ -52,15 +53,18 @@ public class Biblioteca {
     }
 
     public List<Libro> buscarPorTitulo(String titulo) {
-        return libros.values().stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo)).toList();
+        return libros.values().stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo))
+                .sorted(Comparator.comparingInt(Libro::getId)).toList();
     }
 
     public List<Libro> buscarPorAutor(String autor) {
-        return libros.values().stream().filter(libro -> libro.getAutor().equalsIgnoreCase(autor)).toList();
+        return libros.values().stream().filter(libro -> libro.getAutor().equalsIgnoreCase(autor))
+                .sorted(Comparator.comparingInt(Libro::getId)).toList();
     }
 
     public List<Libro> buscarPorAnio(int anio) {
-        return libros.values().stream().filter(libro -> libro.getAnioPublicacion() == anio).toList();
+        return libros.values().stream().filter(libro -> libro.getAnioPublicacion() == anio)
+                .sorted(Comparator.comparingInt(Libro::getId)).toList();
     }
 
     public Optional<Libro> buscarLibroPorId(int id) {
