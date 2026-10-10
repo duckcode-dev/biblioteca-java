@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -44,10 +45,22 @@ public class PersistenciaExcel {
     }
 
     public void guardar(Biblioteca biblioteca) throws IOException {
-        try (Workbook libroExcel = new XSSFWorkbook(); OutputStream salida = Files.newOutputStream(archivo)) {
-            escribirLibros(libroExcel.createSheet(HOJA_LIBROS), biblioteca);
-            escribirUsuarios(libroExcel.createSheet(HOJA_USUARIOS), biblioteca);
-            libroExcel.write(salida);
+        Path destino = archivo.toAbsolutePath();
+        Path temporal = Files.createTempFile(destino.getParent(), destino.getFileName().toString(), ".tmp");
+        try {
+            try (Workbook libroExcel = new XSSFWorkbook(); OutputStream salida = Files.newOutputStream(temporal)) {
+                escribirLibros(libroExcel.createSheet(HOJA_LIBROS), biblioteca);
+                escribirUsuarios(libroExcel.createSheet(HOJA_USUARIOS), biblioteca);
+                libroExcel.write(salida);
+            }
+
+            try {
+                Files.move(temporal, destino, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+            } catch (java.nio.file.AtomicMoveNotSupportedException e) {
+                Files.move(temporal, destino, StandardCopyOption.REPLACE_EXISTING);
+            }
+        } finally {
+            Files.deleteIfExists(temporal);
         }
     }
 
