@@ -14,7 +14,6 @@ public class BibliotecaController {
     private final Biblioteca biblioteca;
     private final PersistenciaExcel persistencia;
     private boolean persistenciaHabilitada = true;
-    private String mensajePendiente = "";
 
     public BibliotecaController(Biblioteca biblioteca, PersistenciaExcel persistencia) {
         this.biblioteca = biblioteca;
@@ -30,24 +29,16 @@ public class BibliotecaController {
         }
     }
 
-    /** Devuelve el último aviso de infraestructura para que la vista lo presente. */
-    public String consumirMensaje() {
-        String mensaje = mensajePendiente;
-        mensajePendiente = "";
-        return mensaje;
-    }
-
-    public boolean agregarLibro(String titulo, String autor, int anio) {
-        if (biblioteca.existeLibro(titulo, autor, anio)) return false;
+    public ResultadoOperacion agregarLibro(String titulo, String autor, int anio) {
+        if (biblioteca.existeLibro(titulo, autor, anio))
+            return new ResultadoOperacion(EstadoOperacion.DUPLICADO, "El libro ya está registrado.");
         biblioteca.agregarLibro(new Libro(0, titulo, autor, anio));
-        guardar();
-        return true;
+        return guardar("Libro ingresado.");
     }
 
-    public boolean agregarUsuario(String nombre, String telefono, String email) {
+    public ResultadoOperacion agregarUsuario(String nombre, String telefono, String email) {
         biblioteca.agregarUsuario(new Usuario(0, nombre, telefono, email));
-        guardar();
-        return true;
+        return guardar("Usuario ingresado.");
     }
 
     public List<Libro> listarLibros() { return biblioteca.listarLibros(); }
@@ -58,26 +49,31 @@ public class BibliotecaController {
     public Optional<Libro> buscarLibroPorId(int id) { return biblioteca.buscarLibroPorId(id); }
     public Optional<Usuario> buscarUsuarioPorId(int id) { return biblioteca.buscarUsuarioPorId(id); }
 
-    public boolean eliminarLibro(int id) { return guardarSi(biblioteca.eliminarLibro(id)); }
-    public boolean eliminarUsuario(int id) { return guardarSi(biblioteca.eliminarUsuario(id)); }
-    public boolean actualizarTituloLibro(int id, String titulo) { return guardarSi(biblioteca.actualizarTituloLibro(id, titulo)); }
-    public boolean actualizarAutorLibro(int id, String autor) { return guardarSi(biblioteca.actualizarAutorLibro(id, autor)); }
-    public boolean actualizarAnioLibro(int id, int anio) { return guardarSi(biblioteca.actualizarAnioLibro(id, anio)); }
-    public boolean actualizarNombreUsuario(int id, String nombre) { return guardarSi(biblioteca.actualizarNombreUsuario(id, nombre)); }
-    public boolean actualizarTelefonoUsuario(int id, String telefono) { return guardarSi(biblioteca.actualizarTelefonoUsuario(id, telefono)); }
-    public boolean actualizarEmailUsuario(int id, String email) { return guardarSi(biblioteca.actualizarEmailUsuario(id, email)); }
+    public ResultadoOperacion eliminarLibro(int id) { return guardarSi(biblioteca.eliminarLibro(id), "Libro eliminado."); }
+    public ResultadoOperacion eliminarUsuario(int id) { return guardarSi(biblioteca.eliminarUsuario(id), "Usuario eliminado."); }
+    public ResultadoOperacion actualizarTituloLibro(int id, String titulo) { return guardarSi(biblioteca.actualizarTituloLibro(id, titulo), "Libro modificado."); }
+    public ResultadoOperacion actualizarAutorLibro(int id, String autor) { return guardarSi(biblioteca.actualizarAutorLibro(id, autor), "Libro modificado."); }
+    public ResultadoOperacion actualizarAnioLibro(int id, int anio) { return guardarSi(biblioteca.actualizarAnioLibro(id, anio), "Libro modificado."); }
+    public ResultadoOperacion actualizarNombreUsuario(int id, String nombre) { return guardarSi(biblioteca.actualizarNombreUsuario(id, nombre), "Usuario modificado."); }
+    public ResultadoOperacion actualizarTelefonoUsuario(int id, String telefono) { return guardarSi(biblioteca.actualizarTelefonoUsuario(id, telefono), "Usuario modificado."); }
+    public ResultadoOperacion actualizarEmailUsuario(int id, String email) { return guardarSi(biblioteca.actualizarEmailUsuario(id, email), "Usuario modificado."); }
 
-    private boolean guardarSi(boolean cambio) {
-        if (cambio) guardar();
-        return cambio;
+    private ResultadoOperacion guardarSi(boolean cambio, String mensajeExito) {
+        if (!cambio)
+            return new ResultadoOperacion(EstadoOperacion.NO_ENCONTRADO, "Registro no encontrado.");
+        return guardar(mensajeExito);
     }
 
-    private void guardar() {
-        if (!persistenciaHabilitada) return;
+    private ResultadoOperacion guardar(String mensajeExito) {
+        if (!persistenciaHabilitada)
+            return new ResultadoOperacion(EstadoOperacion.ERROR_PERSISTENCIA,
+                    "El cambio se realizó en memoria, pero no se puede guardar el archivo Excel.");
         try {
             persistencia.guardar(biblioteca);
+            return new ResultadoOperacion(EstadoOperacion.EXITO, mensajeExito);
         } catch (IOException e) {
-            mensajePendiente = "No se pudieron guardar los datos en biblioteca.xlsx.";
+            return new ResultadoOperacion(EstadoOperacion.ERROR_PERSISTENCIA,
+                    "El cambio se realizó en memoria, pero no se pudo guardar biblioteca.xlsx.");
         }
     }
 }

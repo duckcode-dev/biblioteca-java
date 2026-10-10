@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 import controller.BibliotecaController;
+import controller.ResultadoOperacion;
 import model.Validador;
 
 /**
@@ -44,9 +45,6 @@ public class ConsolaBiblioteca {
                     case "10" -> ejecutando = false;
                     default -> System.out.println("Error: ingrese una opción válida.");
                 }
-                String mensaje = controlador.consumirMensaje();
-                if (!mensaje.isBlank())
-                    System.out.println(mensaje);
             }
         }
         System.out.println("¡Adiós! ¡Que tengas un buen día!");
@@ -63,8 +61,7 @@ public class ConsolaBiblioteca {
         String titulo = leerTexto(entrada, "Ingrese título del libro");
         String autor = leerTexto(entrada, "Ingrese autor del libro");
         int anio = leerAnio(entrada);
-        System.out.println(controlador.agregarLibro(titulo, autor, anio) ? "Libro ingresado."
-                : "Error: el libro ya está ingresado.");
+        mostrarResultado(controlador.agregarLibro(titulo, autor, anio));
     }
 
     private void buscarLibro(Scanner entrada) {
@@ -91,24 +88,23 @@ public class ConsolaBiblioteca {
             return;
         }
         System.out.println("Modificar: 1. Título  2. Autor  3. Año  4. Volver");
-        boolean modificado = switch (entrada.nextLine()) {
+        ResultadoOperacion resultado = switch (entrada.nextLine()) {
             case "1" -> controlador.actualizarTituloLibro(id, leerTexto(entrada, "Ingrese nuevo título"));
             case "2" -> controlador.actualizarAutorLibro(id, leerTexto(entrada, "Ingrese nuevo autor"));
             case "3" -> controlador.actualizarAnioLibro(id, leerAnio(entrada));
-            case "4" -> false;
+            case "4" -> null;
             default -> {
                 System.out.println("Error: ingrese una opción válida.");
-                yield false;
+                yield null;
             }
         };
-        if (modificado)
-            System.out.println("Libro modificado.");
+        if (resultado != null)
+            mostrarResultado(resultado);
     }
 
     private void ingresarUsuario(Scanner entrada) {
-        controlador.agregarUsuario(leerTexto(entrada, "Ingrese nombre de usuario"), leerTelefono(entrada),
-                leerEmail(entrada));
-        System.out.println("Usuario ingresado.");
+        mostrarResultado(controlador.agregarUsuario(leerTexto(entrada, "Ingrese nombre de usuario"),
+                leerTelefono(entrada), leerEmail(entrada)));
     }
 
     private void eliminarUsuario(Scanner entrada) {
@@ -123,18 +119,18 @@ public class ConsolaBiblioteca {
             return;
         }
         System.out.println("Modificar: 1. Nombre  2. Teléfono  3. E-mail  4. Volver");
-        boolean modificado = switch (entrada.nextLine()) {
+        ResultadoOperacion resultado = switch (entrada.nextLine()) {
             case "1" -> controlador.actualizarNombreUsuario(id, leerTexto(entrada, "Ingrese nuevo nombre"));
             case "2" -> controlador.actualizarTelefonoUsuario(id, leerTelefono(entrada));
             case "3" -> controlador.actualizarEmailUsuario(id, leerEmail(entrada));
-            case "4" -> false;
+            case "4" -> null;
             default -> {
                 System.out.println("Error: ingrese una opción válida.");
-                yield false;
+                yield null;
             }
         };
-        if (modificado)
-            System.out.println("Usuario modificado.");
+        if (resultado != null)
+            mostrarResultado(resultado);
     }
 
     private String leerTexto(Scanner entrada, String mensaje) {
@@ -206,12 +202,16 @@ public class ConsolaBiblioteca {
     }
 
     private <T> void eliminarPorId(int id, Scanner entrada, String tipo, Function<Integer, Optional<T>> buscar,
-            Function<Integer, Boolean> eliminar, Function<T, String> mensaje) {
+            Function<Integer, ResultadoOperacion> eliminar, Function<T, String> mensaje) {
         Optional<T> entidad = buscar.apply(id);
         if (entidad.isEmpty())
             System.out.println(tipo + " no encontrado.");
-        else if (confirmar(entrada, mensaje.apply(entidad.get())) && eliminar.apply(id))
-            System.out.println(tipo + " eliminado.");
+        else if (confirmar(entrada, mensaje.apply(entidad.get())))
+            mostrarResultado(eliminar.apply(id));
+    }
+
+    private void mostrarResultado(ResultadoOperacion resultado) {
+        System.out.println(resultado.mensaje());
     }
 
     private void mostrarLista(List<?> elementos) {
